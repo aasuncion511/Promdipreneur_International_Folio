@@ -34,7 +34,7 @@ Nothing was changed on international.promdipreneur.com, its DNS, GHL funnels, th
 | The workflow diagram is relabelled **Example workflow** with an on-screen note that it is illustrative, and its end state reads "Example complete", never "System live" | Keeps V2's best motion piece without implying a live client system |
 | **Experience** section: four perspectives (owner, staff, customer, supplier) plus a selected timeline, with roles involving US-based companies marked "US" | Turns 20+ years into the differentiator without a résumé dump |
 | "Ways to work together": mapping, defined project, part-time support, agency delivery support. Hours and overlap are "agreed per engagement" | Fits the target engagements; no night-shift or 24/7 promise |
-| Toolbox grouped by job (CRM and journeys, operational tools, thinking and prototyping, development), logos on light keys with names visible, Make and Zapier as "Also familiar with", plus a no-partnership note | Recognisable, secondary to the work, no proficiency bars |
+| Toolbox grouped by job (CRM and journeys; operational tools incl. Google Workspace; thinking and prototyping; development and collaboration incl. Slack), logos on light keys with names visible, Make and Zapier as "Also familiar with", plus a no-partnership note | Recognisable, secondary to the work, no proficiency bars |
 | Contact leads with a green **Book a project introduction** panel (existing GHL calendar, new tab), then email, FAQs and an email-draft form whose button says **Open email draft** and whose success state says the message **has not been sent yet** | One obvious next step; the form never claims to send anything |
 | Cream `#F7F7F3` default, dark green `#004C25` for ink and buttons, bright `#18B957` only for "live" or system steps, brown `#754000` for annotations and the tagline. Optional dark "Forest" theme | Clearly PromdiPreneur; no template blue remains |
 | Real logo cropped from the original asset. The sidebar uses the bulb mark plus the wordmark; on dark the wordmark sits on a cream plate rather than being recoloured. "AA" monogram instead of a photo | Logo used as drawn; no invented portrait |
@@ -85,7 +85,7 @@ Promotional prices are not shown anywhere on the portfolio.
 - Section order: `src/features/home/sections.ts`
 - Case-study sheet: `src/features/home/work/WorkSheet.tsx`; P-05 illustration: `QrCheckinIllustration.tsx`
 - New sections: `src/features/home/tools/`, rebuilt `about/`, `hero/`, `work/`
-- Images: `public/images/work/` (captures from the live pages), `public/images/brand/` (logo crops), `public/images/tools/` (official HighLevel mark, Simple Icons CC0, Lobe Icons MIT)
+- Images: `public/images/work/` (captures from the live pages), `public/images/brand/` (logo crops), `public/images/tools/` (official HighLevel mark, Simple Icons and SVG Logos CC0, Lobe Icons MIT)
 
 ## License
 
