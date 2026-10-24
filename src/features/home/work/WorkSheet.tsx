@@ -97,6 +97,7 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
                 <p className="sh__meta">
                   <span className="sh__code">{shown.code}</span>
                   <span>{shown.kind}</span>
+                  {shown.statusNote ? <span className="wb__pill">{shown.statusNote}</span> : null}
                 </p>
                 <h2 id="sh-title" className="sh__title">
                   {shown.title}
@@ -197,7 +198,7 @@ function CaseStudyBody({ chapter }: { chapter: WorkChapter }) {
 
       <section className="cs__block" aria-labelledby="cs-evidence">
         <h3 id="cs-evidence" className="cs__label" data-reveal>
-          <span>06</span> Evidence you can check
+          <span>06</span> {chapter.status === 'in-progress' ? 'Where it stands' : 'Evidence you can check'}
         </h3>
         {cs.links.length ? (
           <p className="cs__links" data-reveal>

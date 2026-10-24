@@ -287,7 +287,51 @@ export const workChapters: WorkChapter[] = [
       ],
     },
   },
+  {
+    id: 'meta-ads',
+    code: 'P-06',
+    kind: 'In progress · own businesses',
+    status: 'in-progress',
+    statusNote: 'Started October 2026 · too early for results',
+    title: 'Meta Ads for My Own Store and Cleaning Company',
+    line: 'Paid traffic for the PromdiPreneur Digital Store and Fresh Start Cleaning, with tracking set up before the spend.',
+    count: 2,
+    unit: 'businesses',
+    description:
+      'Meta ad campaigns I am running for my own Digital Store and cleaning company, starting with PromdiPreneur Payroll in October 2026. Measurement first; no results claimed yet.',
+    stack: ['Meta Ads Manager', 'Meta Pixel', 'GoHighLevel', 'UTM tracking'],
+    marks: [tools.meta, tools.ghl],
+    items: [],
+    caseStudy: {
+      problem:
+        'My own products and cleaning company need inquiries and buyers beyond referrals and organic posts. Paid ads only help if every click can be traced to a visit, an inquiry or a sale. Otherwise the budget teaches you nothing.',
+      built: [
+        'Tracking before spending: the Meta Pixel installed in the GoHighLevel funnel and checked in Events Manager.',
+        'A campaign structure that starts by optimising for landing-page views, and moves to purchase optimisation only once real purchase events exist.',
+        'Three to four ads per campaign, each tagged with its own UTM parameters, so every visit can be traced to the ad that sent it.',
+        'Creatives made in-house in the brand colours: static images and short vertical videos.',
+        'A written launch and review playbook: a publish checklist, daily checks for the first week, and a pause rule for ads that cost too much per visit or get too few clicks.',
+      ],
+      role: ['Campaign planning and structure', 'Pixel and UTM tracking set-up', 'Creative direction and ad copy', 'Monitoring rules and daily checks'],
+      flow: [
+        { label: 'Ad', note: 'Meta, UTM-tagged', by: 'person' },
+        { label: 'Landing page', note: 'GoHighLevel funnel', by: 'system' },
+        { label: 'Pixel event', note: 'Visit recorded per ad', by: 'system' },
+        { label: 'Checkout or inquiry', note: 'Store sale or cleaning quote', by: 'person' },
+        { label: 'Review and adjust', note: 'Daily checks, pause rule', by: 'person' },
+      ],
+      matters:
+        'Ads are the most expensive way to find out a funnel leaks. Setting up measurement first means the first weeks of spend answer real questions: which ad, which page, which step loses people. It is the same discipline I would bring to a client’s campaign.',
+      evidence: [],
+      links: [],
+      notes: [
+        'Status: running for my own businesses since October 2026, starting with PromdiPreneur Payroll. There is not enough data yet to report results, so no figures, costs or sales numbers are shown.',
+        'I will add results here once there are enough to report honestly, good or bad.',
+        'Ad account details and budgets are kept private.',
+      ],
+    },
+  },
 ]
 
-/** Number of projects, shown as the sidebar badge. Derived, never typed in. */
-export const workCount = workChapters.length
+/** Number of finished projects, shown as the sidebar badge. Derived, never typed in. */
+export const workCount = workChapters.filter((chapter) => chapter.status !== 'in-progress').length

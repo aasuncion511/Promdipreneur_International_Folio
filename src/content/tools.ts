@@ -12,6 +12,7 @@ const mark = (name: string, file: string, mono?: true): ToolMark => ({ name, log
  */
 export const tools = {
   ghl: mark('GoHighLevel', 'highlevel.svg'),
+  meta: mark('Meta Ads', 'meta.svg'),
   workspace: mark('Google Workspace', 'google-workspace.svg'),
   sheets: mark('Google Sheets', 'googlesheets.svg'),
   appsScript: mark('Google Apps Script', 'googleappsscript.svg'),
@@ -37,9 +38,9 @@ export type ToolGroup = { id: string; title: string; use: string; tools: ToolMar
 export const toolGroups: ToolGroup[] = [
   {
     id: 'crm',
-    title: 'CRM and customer journeys',
-    use: 'Pipelines, forms, calendars, funnels, stores and the follow-up workflows behind them.',
-    tools: [tools.ghl],
+    title: 'CRM, ads and customer journeys',
+    use: 'Pipelines, forms, calendars, funnels and stores, the follow-up workflows behind them, and the paid traffic that feeds them.',
+    tools: [tools.ghl, tools.meta],
   },
   {
     id: 'ops',

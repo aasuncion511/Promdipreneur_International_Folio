@@ -261,6 +261,76 @@
   }
 }
 
+/* In progress: one wide card under the finished work, marks on the left, a status pill instead of proof. */
+.wb__now {
+  margin-top: clamp(28px, 5vh, 44px);
+}
+.wb__now-title {
+  margin: 0 0 12px;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.wb__now > ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wb__now-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) minmax(0, 1fr);
+  overflow: clip;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  transition:
+    transform var(--dur-slow) var(--ease-spring),
+    box-shadow var(--dur-slow) var(--ease-spring);
+}
+.wb__now-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.wb__now-face {
+  position: relative;
+  min-height: 180px;
+  margin: 10px 0 10px 10px;
+  overflow: clip;
+  border-radius: calc(var(--radius-xl) - 10px);
+}
+.wb__pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--earth-soft);
+  color: var(--earth);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+@media (hover: hover) and (pointer: fine) {
+  .wb__now-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-float);
+  }
+  .wb__now-card:hover .wb__open svg {
+    transform: translateX(4px);
+  }
+}
+@container (max-width: 560px) {
+  .wb__now-card {
+    grid-template-columns: 1fr;
+  }
+  .wb__now-face {
+    min-height: 150px;
+    margin: 10px 10px 0;
+  }
+}
+
 /* Cards rise in as they scroll into view (CSS view timeline, compositor only). */
 @keyframes wb-rise {
   from {

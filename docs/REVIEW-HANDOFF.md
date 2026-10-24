@@ -42,6 +42,8 @@ Removed from V2: Proof (no verified testimonials or client accounts), Showcase (
 - Fresh Start: live site still contains John Doe / Jane Doe placeholder testimonials. None of its testimonials are reproduced.
 - MinBizCon (from the MinBizCon Drive folder and the scanner's source, 24 Oct): 35th Mindanao Business Conference, Aug 11–13, 2026, Cagayan de Oro; Promdipreneur BASA as official digital check-in partner. Built on Google Sheets, Apps Script, Gmail, Google Forms and Looker Studio, with the scanner on Netlify. The case study shows a real capture of the scanner's start screen and an interactive demo that recreates the scanner's rules with synthetic attendees. "About 800 expected" only; no attendance totals or queue-time claims (the attendance sheet holds personal data, so it was not copied).
 
+- Meta Ads (P-06, shown under "In progress"): facts from Allan's own launch playbook (first campaign: PromdiPreneur Payroll, Oct 2026; Pixel in the GHL funnel; landing-page-view optimisation first; UTM-tagged ads; in-house creatives; daily checks and a pause rule). No spend, results or account IDs are shown. Ads Manager itself was not accessed.
+
 Promotional prices are not shown anywhere on the portfolio.
 
 ## Checks run

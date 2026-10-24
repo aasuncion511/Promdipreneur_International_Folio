@@ -58,7 +58,9 @@ export function HeroSection() {
 
         <nav className="hero__proof" aria-label="Projects">
           <ol>
-            {workChapters.map((chapter) => (
+            {workChapters
+              .filter((chapter) => chapter.status !== 'in-progress')
+              .map((chapter) => (
               <li key={chapter.id}>
                 <Link to={chapterPath(chapter.id)} state={{ sheet: true }} preventScrollReset className="hero__job">
                   <span className="hero__job-code">{chapter.code}</span>

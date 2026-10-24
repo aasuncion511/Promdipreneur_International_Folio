@@ -14,6 +14,9 @@ const TILE_SIZES = 'auto, (min-width: 1280px) 44vw, (min-width: 1024px) 60vw, 92
  * project's kind, a one-line summary and its workflow as a chip row, so the work reads without opening
  * anything. Every card is a real link to /work/<project>, which opens its case-study sheet over Home.
  */
+const done = workChapters.filter((chapter) => chapter.status !== 'in-progress')
+const running = workChapters.filter((chapter) => chapter.status === 'in-progress')
+
 export function WorkSection() {
   return (
     <section id="work" className="wk wb" aria-labelledby="work-title">
@@ -25,7 +28,7 @@ export function WorkSection() {
         <p className="wk-lede">{workSection.lede}</p>
       </header>
       <ul className="wb__grid">
-        {workChapters.map((chapter) => {
+        {done.map((chapter) => {
           const pic = chapterPicture(chapter)
           return (
             <li key={chapter.id} className="wb__cell" data-area={chapter.id}>
@@ -71,6 +74,42 @@ export function WorkSection() {
           )
         })}
       </ul>
+
+      {running.length ? (
+        <div className="wb__now">
+          <h3 className="wb__now-title">In progress</h3>
+          <ul>
+            {running.map((chapter) => (
+              <li key={chapter.id}>
+                <Link to={chapterPath(chapter.id)} state={{ sheet: true }} preventScrollReset className="wb__now-card">
+                  <span className="wb__now-face" aria-hidden>
+                    <ChapterFace chapter={chapter} foot={false} />
+                  </span>
+                  <span className="wb__cap">
+                    <span className="wb__meta">
+                      <span className="wb__code">{chapter.code}</span>
+                      <span className="wb__pill">{chapter.statusNote}</span>
+                    </span>
+                    <b className="wb__title">{chapter.title}</b>
+                    <span className="wb__line">{chapter.line}</span>
+                    <span className="wb__flow">
+                      {chapter.caseStudy.flow.map((step) => (
+                        <span key={step.label} data-by={step.by}>
+                          {step.label}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="wb__open">
+                      See the set-up
+                      <ArrowRight size={14} weight="bold" aria-hidden />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </section>
   )
 }

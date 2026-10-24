@@ -140,6 +140,10 @@ export type WorkChapter = {
   code: string
   /** What kind of work it is ("Own product", "Own business"). */
   kind: string
+  /** Work still running, shown apart from finished projects and never with results. */
+  status?: 'in-progress'
+  /** One line on where it stands, shown as the in-progress pill. */
+  statusNote?: string
   /** The tools it runs on, as short names. */
   stack: string[]
   caseStudy: CaseStudy
