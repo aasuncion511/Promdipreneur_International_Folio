@@ -1,39 +1,39 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- data-static-meta: for crawlers that do not run JS. main.tsx removes them on boot so each route owns one title + description.
          Keep this head in step with content/site.ts and the Home entry in src/app/routes.ts. -->
-    <title data-static-meta>Your Name | Your Headline Here</title>
-    <meta data-static-meta name="description" content="PLACEHOLDER - tell me what to put here: the one-sentence description of you and what you do (under 160 characters)." />
+    <title data-static-meta>Allan Asuncion | Business Systems &amp; Automation Implementer</title>
+    <meta data-static-meta name="description" content="20+ years running sales, operations and supply businesses. I map how your work really moves, then build the CRM, workflows and automation around it." />
+    <!-- Review build for comparison: keep it out of search until a domain is chosen. Remove this line at launch. -->
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href="/fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- The phone bar's mark is the mobile LCP; dark is the default theme, so its mark loads first. -->
-    <link rel="preload" href="/images/brand/mark-light-96.webp" as="image" fetchpriority="high" />
-    <meta name="theme-color" content="#0A0A0A" />
+    <link rel="preload" href="/images/brand/promdipreneur-logo-480.webp" as="image" fetchpriority="high" />
+    <meta name="theme-color" content="#F7F7F3" />
 
     <meta property="og:type" content="website" />
-    <!-- Link previews: absolute URLs on your domain. Re-render og-image.png with scripts/make-og-image.mjs. -->
-    <meta property="og:site_name" content="Your Name - Your Brand" />
-    <meta property="og:url" content="https://example.com/" />
-    <meta property="og:title" content="Your Name | Your Headline Here" />
-    <meta property="og:description" content="PLACEHOLDER - tell me what to put here: the one-sentence description of you and what you do (under 160 characters)." />
-    <meta property="og:image" content="https://example.com/og-image.png" />
+    <meta property="og:site_name" content="Allan Asuncion - PromdiPreneur BASA Consultancy" />
+    <meta property="og:url" content="https://international.promdipreneur.com/" />
+    <meta property="og:title" content="Allan Asuncion | Business Systems &amp; Automation Implementer" />
+    <meta property="og:description" content="20+ years running sales, operations and supply businesses. I map how your work really moves, then build the CRM, workflows and automation around it." />
+    <meta property="og:image" content="https://international.promdipreneur.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Your Name, Your Role" />
+    <meta property="og:image:alt" content="Allan Asuncion, Business Systems and Automation Implementer, PromdiPreneur" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://example.com/og-image.png" />
+    <meta name="twitter:image" content="https://international.promdipreneur.com/og-image.png" />
 
-    <!-- Dark by default; a saved light pick is applied before first paint, so it never flashes dark first.
+    <!-- Light (cream) by default; a saved dark pick is applied before first paint, so it never flashes light first.
          Mirrors src/lib/theme.ts. The deploy CSP allows this script by hash: after any edit run npm run csp:check. -->
     <script>
       try {
-        if (localStorage.getItem('pv2-theme') === 'light') {
-          document.documentElement.dataset.theme = 'light'
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F0F8FF')
+        if (localStorage.getItem('pv2-theme') === 'dark') {
+          document.documentElement.dataset.theme = 'dark'
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0B1610')
         }
       } catch (e) {}
     </script>

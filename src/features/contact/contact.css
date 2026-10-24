@@ -3,11 +3,112 @@
  * (5 parts) beside the form panel (7 parts); one column under 820px of container.
  */
 
+/* The primary next step: the booking calendar, on the brand green, ahead of everything else. */
+.ct-book {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 28px 48px;
+  align-items: center;
+  margin-top: clamp(32px, 6vh, 48px);
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: var(--radius-xl);
+  background: #004c25;
+  color: #f7f7f3;
+  box-shadow: var(--shadow-float);
+}
+.ct-book__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgb(24 185 87 / 0.22);
+  color: #7ee2a4;
+}
+.ct-book .ct-book__title {
+  color: #ffffff;
+  margin: 16px 0 0;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.ct-book__copy > p {
+  max-width: 52ch;
+  margin: 12px 0 0;
+  color: rgb(247 247 243 / 0.82);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.ct-book__actions {
+  min-width: 0;
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+.ct-book .btn-solid {
+  max-width: 100%;
+  white-space: normal;
+  border-color: #18b957;
+  background: #18b957;
+  color: #03200e;
+}
+.ct-book .btn-solid:hover {
+  box-shadow: 0 0 0 4px rgb(24 185 87 / 0.3);
+}
+.ct-book .btn-solid:focus-visible {
+  outline-color: #f7f7f3;
+}
+.ct-book__note {
+  margin: 0;
+  color: rgb(247 247 243 / 0.72);
+  font-size: 13px;
+}
+.ct-book__mail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgb(247 247 243 / 0.18);
+  color: rgb(247 247 243 / 0.82);
+  font-size: 14.5px;
+}
+.ct-book__mail > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(24 185 87 / 0.8);
+  text-underline-offset: 4px;
+}
+.ct-book__mail > a:focus-visible {
+  outline-color: #f7f7f3;
+}
+.ct-book__mail > span {
+  flex-basis: 100%;
+  color: rgb(247 247 243 / 0.66);
+  font-size: 13px;
+}
+@media (max-width: 1180px) {
+  .ct-book {
+    grid-template-columns: 1fr;
+  }
+  .ct-book .btn-solid {
+    justify-content: center;
+    width: 100%;
+    white-space: normal;
+  }
+}
+
 .ct-sheet {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: 16px;
-  margin-top: clamp(40px, 7vh, 56px);
+  margin-top: 16px;
 }
 .ct-plate,
 .ct-panel {

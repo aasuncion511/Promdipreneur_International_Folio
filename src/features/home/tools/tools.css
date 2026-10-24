@@ -1,0 +1,151 @@
+/* Toolbox: four groups on a 2x2 grid, each with its logos as paper keys and visible names. */
+
+.tl {
+  --gutter: clamp(16px, 3.5vw, 56px);
+  container-type: inline-size;
+  padding: clamp(64px, 10vh, 112px) var(--gutter);
+  scroll-margin-top: 56px;
+}
+@media (min-width: 1024px) {
+  .tl {
+    scroll-margin-top: 0;
+  }
+}
+.tl__lede {
+  max-width: 60ch;
+  margin: 18px 0 0;
+  color: var(--ink-2);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+  line-height: 1.55;
+}
+
+.tl__groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: clamp(28px, 5vh, 48px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tl__group {
+  padding: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.tl__group > h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.tl__group > p {
+  margin: 6px 0 18px;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.tl__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tl__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+/* The raised paper key: lit from above, a bevel along the bottom, the logo pressed into it. */
+.tl__mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  box-shadow:
+    0 1px 2px rgb(15 36 24 / 0.1),
+    inset 0 1.5px 0 var(--paper-light),
+    inset 0 -2px 0 var(--paper-bevel),
+    inset 0 0 0 1px var(--paper-line);
+}
+.tl__mark > img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.tl__name {
+  font-size: 14px;
+  font-weight: 560;
+}
+
+.tl__also {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin: 22px 0 0;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.tl__also > span:first-child {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.tl__also-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tl__also-item > img {
+  padding: 3px;
+  border-radius: 6px;
+  background: var(--paper);
+  box-sizing: content-box;
+}
+.tl__fine {
+  margin: 10px 0 0;
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+
+@container (max-width: 700px) {
+  .tl__groups {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keys pop in one by one as the group scrolls into view (a little life; compositor only). */
+@keyframes tl-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tl .tl__key {
+      animation: tl-pop linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--i) * 6%) entry calc(45% + var(--i) * 6%);
+    }
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .tl__mark {
+    transition: transform var(--dur-base) var(--ease-spring);
+  }
+  .tl__key:hover .tl__mark {
+    transform: translateY(-2px) rotate(-4deg);
+  }
+}

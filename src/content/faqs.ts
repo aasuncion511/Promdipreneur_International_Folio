@@ -1,26 +1,31 @@
 import type { Faq } from './schema'
 
-/** The questions people ask before they write. Pages pick the ones that answer their own objection. */
+/** The questions people ask before they book. */
 export const faqs = {
   whatYouBuild: {
-    question: 'What do you actually build?',
-    answer: 'PLACEHOLDER - tell me what to put here: the kinds of work you take on and who it is usually for, in two sentences.',
+    question: 'What kind of projects do you take on?',
+    answer:
+      'Defined implementation work: CRM pipelines and follow-up in GoHighLevel, customer journeys from inquiry to payment, and operating tools in Google Sheets and Apps Script. I also support agencies with scoped delivery, and stay on part-time when a running system needs improving.',
   },
-  startSpeed: {
-    question: 'How fast can you start?',
-    answer: 'PLACEHOLDER - tell me what to put here: how soon you can begin small and large jobs, and the hours or time zones you overlap.',
+  timeZones: {
+    question: 'I’m in the US or Australia. How do we work across time zones?',
+    answer:
+      'I’m in the Philippines (GMT+8). Meeting overlap and working hours are agreed per engagement. Most build work runs asynchronously with scheduled check-ins and written updates, so you always know where things stand.',
   },
   needStack: {
-    question: 'Do I need a specific platform?',
-    answer: 'PLACEHOLDER - tell me what to put here: which tools you work in, and what you do when a client stack is a poor fit.',
+    question: 'Do I need GoHighLevel?',
+    answer:
+      'No. I start from how your work moves, then use what you already have where it fits. GoHighLevel is my main CRM platform; Google Sheets and Apps Script cover a lot of operational work without new subscriptions.',
   },
   pricing: {
-    question: 'How much do you charge?',
-    answer: 'PLACEHOLDER - tell me what to put here: how you price (fixed, hourly, retainer), what comes before a quote, and what is included.',
+    question: 'How is pricing handled?',
+    answer:
+      'Defined projects are quoted at a fixed price after a short discovery, with a written scope and acceptance checklist. Part-time support is scoped by monthly hours. You see the scope before anything starts.',
   },
-  afterWrite: {
-    question: 'What happens after I write?',
-    answer: 'PLACEHOLDER - tell me what to put here: how fast you reply and what the visitor gets back (a plan, a call, a straight no).',
+  afterBook: {
+    question: 'What happens after I book?',
+    answer:
+      'We talk through your process and where it breaks. If I can help, I follow up in writing with what I would build first and how. If I am not the right fit, I will say so.',
   },
 } satisfies Record<string, Faq>
 

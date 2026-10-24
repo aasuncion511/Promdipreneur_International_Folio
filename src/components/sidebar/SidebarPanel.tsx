@@ -1,8 +1,7 @@
 import { useRef, type PointerEvent, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { SealCheck } from '@phosphor-icons/react'
 import { site } from '@/content/site'
-import { BrandMark } from '@/components/brand/BrandMark'
+import { BrandMark, BrandWordmark } from '@/components/brand/BrandMark'
 import { SocialLinks } from '@/components/brand/SocialLinks'
 import { useLocalTime } from '@/hooks/use-local-time'
 import { SidebarNav } from './SidebarNav'
@@ -42,14 +41,11 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
         </p>
         <Link to="/" className="sb-logo" onClick={onNavigate} aria-label={`${site.brand} home`}>
           <BrandMark className="sb-logo__mark" />
-          <span className="sb-logo__name sb-fade" aria-hidden>
-            {site.brandParts[0]}
-            <span className="sb-logo__accent">{site.brandParts[1]}</span>
-          </span>
+          <BrandWordmark className="sb-logo__name sb-fade" />
         </Link>
 
         <Link
-          to="/about"
+          to="/#about"
           className="sb-profile"
           onClick={onNavigate}
           onPointerEnter={(e: PointerEvent<HTMLAnchorElement>) => reportProfile(e.currentTarget)}
@@ -58,9 +54,9 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
           onBlur={clearHover}
         >
           <span className="sb-pic">
-            <img className="sb-pic__img" src={site.avatarSmall} alt="" width={224} height={224} />
-            <span className="sb-pic__check" aria-hidden>
-              <SealCheck weight="fill" />
+            {/* No verified portrait yet: a monogram, never a stand-in photo. */}
+            <span className="sb-pic__img sb-pic__mono" aria-hidden>
+              {site.monogram}
             </span>
           </span>
           <span className="sb-profile__name sb-fade">{site.name}</span>

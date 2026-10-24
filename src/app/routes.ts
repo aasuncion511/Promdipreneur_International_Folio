@@ -1,7 +1,7 @@
 import type { Icon } from '@phosphor-icons/react'
-import { Briefcase, Compass, Cube, Envelope, FileText, House, SealCheck, ShieldCheck, Stack, User } from '@phosphor-icons/react'
+import { Briefcase, CalendarCheck, Envelope, FileText, House, ShieldCheck, Stack, Storefront, User, Wrench } from '@phosphor-icons/react'
 import { workCount } from '@/content/work'
-import { externalLinks, site } from '@/content/site'
+import { booking, externalLinks, site } from '@/content/site'
 
 /**
  * The route registry: the one list that drives the router, the sidebar, the search palette
@@ -12,7 +12,7 @@ export type NavGroupId = 'menu' | 'discover' | 'general'
 
 export const NAV_GROUPS: { id: NavGroupId; label: string }[] = [
   { id: 'menu', label: 'Menu' },
-  { id: 'discover', label: 'Discover' },
+  { id: 'discover', label: 'Next step' },
   { id: 'general', label: 'General' },
 ]
 
@@ -57,8 +57,8 @@ export const pages: PageRoute[] = [
     id: 'home',
     path: '/',
     label: 'Home',
-    title: `${SUFFIX} | Your Headline Here`,
-    description: 'PLACEHOLDER - tell me what to put here: the one-sentence search result description of you and what you do (under 160 characters).',
+    title: `${SUFFIX} | Business Systems & Automation Implementer`,
+    description: '20+ years running sales, operations and supply businesses. I map how your work really moves, then build the CRM, workflows and automation around it.',
     icon: House,
     group: 'menu',
   },
@@ -69,7 +69,7 @@ export const pages: PageRoute[] = [
     path: '/work',
     label: 'Work',
     title: `Work | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line on the kinds of work you show.',
+    description: 'Five systems Allan built: a cleaning-business kit funnel, a Sheets payroll app, a GoHighLevel store, a service business journey and event QR check-in.',
     icon: Briefcase,
     group: 'menu',
     badge: workCount,
@@ -80,9 +80,9 @@ export const pages: PageRoute[] = [
     id: 'services',
     draft: true,
     path: '/services',
-    label: 'Services',
-    title: `Services | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line listing the services you offer.',
+    label: 'Ways to work',
+    title: `Ways to work together | ${SUFFIX}`,
+    description: 'Process and CRM mapping, defined implementation projects, part-time systems support and agency delivery support.',
     icon: Stack,
     group: 'menu',
     section: 'services',
@@ -92,34 +92,24 @@ export const pages: PageRoute[] = [
     id: 'about',
     draft: true,
     path: '/about',
-    label: 'About',
-    title: `About ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line on your background and where you are based.',
+    label: 'Experience',
+    title: `Experience | ${SUFFIX}`,
+    description: '20+ years of sales, operations, supply and startup experience, including years with US-based companies, now applied to business systems.',
     icon: User,
     group: 'menu',
     section: 'about',
   },
   {
     kind: 'page',
-    id: 'proof',
-    path: '/proof',
-    label: 'Proof',
-    title: `Proof | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line on the clients, testimonials and feedback this page shows.',
-    icon: SealCheck,
-    group: 'discover',
-    section: 'proof',
-  },
-  {
-    kind: 'page',
-    id: 'showcase',
-    path: '/showcase',
-    label: 'Showcase',
-    title: `Showcase | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line on the product or project you feature here.',
-    icon: Cube,
-    group: 'discover',
-    section: 'showcase',
+    id: 'tools',
+    draft: true,
+    path: '/tools',
+    label: 'Toolbox',
+    title: `Toolbox | ${SUFFIX}`,
+    description: 'GoHighLevel, Google Sheets and Apps Script, AI models for thinking and prototyping, and development tools for versioned builds.',
+    icon: Wrench,
+    group: 'menu',
+    section: 'tools',
   },
   {
     kind: 'page',
@@ -127,9 +117,9 @@ export const pages: PageRoute[] = [
     path: '/contact',
     label: 'Contact',
     title: `Contact | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line inviting people to get in touch, and when you reply.',
+    description: 'Book a project introduction or email Allan about the process you want organized and automated. Replies within one business day.',
     icon: Envelope,
-    group: 'general',
+    group: 'discover',
     section: 'contact',
   },
   {
@@ -155,14 +145,24 @@ export const pages: PageRoute[] = [
 export const externals: ExternalRoute[] = [
   {
     kind: 'external',
-    id: 'resource',
-    href: externalLinks.resource,
-    label: 'Resources',
-    description: 'PLACEHOLDER - tell me what to put here: one line on the off-site link (a blog, a guide, a store), or delete this entry.',
-    icon: Compass,
+    id: 'book',
+    href: booking.href,
+    label: booking.short,
+    description: 'Open the project-introduction calendar in a new tab.',
+    icon: CalendarCheck,
+    group: 'discover',
+  },
+  {
+    kind: 'external',
+    id: 'store',
+    href: externalLinks.store,
+    label: 'Digital store',
+    description: 'The live PromdiPreneur store (P-03 in the work).',
+    icon: Storefront,
     group: 'discover',
   },
 ]
+
 
 /** Sidebar entries per group, in registry order (pages first, then external links). */
 export function navEntries(group: NavGroupId): NavEntry[] {

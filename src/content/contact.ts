@@ -1,37 +1,40 @@
 /**
- * Contact: the headline is the route's own line; faqEyebrow, faqSub and the form copy are the plate
- * and the form beside it. Change the words here, never in the components.
+ * Contact: booking first, email second, the email-draft form for anyone who prefers to write.
+ * Change the words here, never in the components.
  */
 export const contactPage = {
   eyebrow: 'Contact',
-  titleThin: 'Tell me what',
-  titleBold: 'you need built.',
-  lede: 'Read the answers first. If your question is still open, write and I will reply with a plan or a straight no.',
+  titleThin: 'Tell me where',
+  titleBold: 'the work gets stuck.',
+  lede: 'Book a project introduction, or write. Either way you get a straight answer on whether I can help, and what I would do first.',
+  bookTitle: 'Book a project introduction',
+  bookBody: 'Pick a time on my calendar. We talk through your process, what is breaking, and whether a defined project makes sense.',
+  bookNote: 'Opens my booking calendar in a new tab. Times show in your own time zone.',
+  emailTitle: 'Prefer email?',
   faqEyebrow: 'FAQs',
-  faqTitle: 'Quick answers',
-  faqSub: 'Still have one? Write below.',
-  cardTitle: 'Send me a message',
-  cardBody: 'What do you need? What are you using today? Two or three lines is enough.',
+  faqTitle: 'Before you book',
+  faqSub: 'Still have a question? Write below.',
+  cardTitle: 'Draft an email',
+  cardBody: 'Two or three lines is enough: what your business does, what tools you use, and where things fall through.',
 }
 
-/** The form. Until a backend is wired, Send opens the visitor's own mail app with the message laid out. */
+/** The form. There is no backend: a complete message opens the visitor's own email app with it laid out. */
 export const contactForm = {
   first: 'First name',
   last: 'Last name',
-  email: 'Email',
-  message: 'Tell me more about your project',
+  email: 'Your email',
+  message: 'What should the system fix?',
   phFirst: 'First name',
   phLast: 'Last name',
   phEmail: 'you@yourbusiness.com',
-  phMessage: 'What do you need? What are you using today? What does a good result look like?',
-  send: 'Send message',
-  hint: 'This form opens your own email app. Nothing is sent to or stored on this site.',
-  error: 'Add your name, a real email, and a short note.',
-  sentTitle: 'Your mail app has it.',
-  sentBody: 'The message is laid out and addressed. Press send there and it is on its way.',
-  // The fallback for a visitor whose browser has no mail app set up.
-  noMailApp: 'No mail app opened? Write to',
+  phMessage: 'What does your business do? What tools do you use today? Where do leads, jobs or payments fall through?',
+  send: 'Open email draft',
+  hint: 'This opens your own email app with the message filled in. Nothing is sent until you press send there.',
+  error: 'Add your name, a valid email and a short note.',
+  sentTitle: 'Your email app should have opened.',
+  sentBody: 'The message is addressed and laid out. It has not been sent yet: press send in your email app.',
+  noMailApp: 'Nothing opened? Copy the message and write to',
   copy: 'Copy message',
   copied: 'Copied',
-  again: 'Write another',
+  again: 'Edit the message',
 }

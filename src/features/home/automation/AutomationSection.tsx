@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import type { Icon } from '@phosphor-icons/react'
 import {
-  BellRinging,
   CalendarCheck,
   CaretLeft,
   CaretRight,
+  ClipboardText,
   Clock,
+  CurrencyCircleDollar,
   EnvelopeSimple,
   FileText,
-  Heart,
+  GitFork,
   Hourglass,
   Lightning,
-  Trophy,
-  VideoCamera,
+  ListChecks,
+  UsersThree,
   XCircle,
 } from '@phosphor-icons/react'
 import { liveAutomation, type FlowIcon } from '@/content/automation'
@@ -25,14 +26,15 @@ import './automation.css'
 const ICONS: Record<FlowIcon, Icon> = {
   form: Lightning,
   email: EnvelopeSimple,
-  booked: CalendarCheck,
-  reminder: Clock,
-  alarm: BellRinging,
-  call: VideoCamera,
+  scope: ClipboardText,
   proposal: FileText,
-  won: Trophy,
+  reminder: Clock,
+  decision: GitFork,
+  booked: CalendarCheck,
+  crew: UsersThree,
+  check: ListChecks,
+  won: CurrencyCircleDollar,
   later: Hourglass,
-  nurture: Heart,
   lost: XCircle,
 }
 // The drawn content spans y 15-560: crop the empty edges so the diagram reads bigger.
@@ -40,7 +42,7 @@ const FULL_VIEW = `0 15 ${VIEW.w} 545`
 const pad2 = (n: number) => String(n).padStart(2, '0')
 
 /**
- * Live automation: a lead's path through the booking pipeline, drawn stage by stage while the section
+ * Example workflow (labelled as such on screen): a customer's path from inquiry to a paid job, drawn stage by stage while the section
  * holds (CSS sticky) and the page scrolls. The rail follows the method steps. Pointing at a
  * stage inspects it; on phones a tap zooms the diagram onto it, with previous / next.
  */
@@ -102,6 +104,7 @@ export function AutomationSection() {
           <h2 id="fl-title" className="wk-title">
             <span>{liveAutomation.titleThin}</span> <span className="wk-title__bold">{liveAutomation.titleBold}</span>
           </h2>
+          <p className="fl__note">{liveAutomation.note}</p>
         </header>
 
         <div className="fl__grid">

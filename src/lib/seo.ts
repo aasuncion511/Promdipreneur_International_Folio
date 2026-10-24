@@ -1,5 +1,5 @@
-import { certification, site } from '@/content/site'
-import type { Faq, ProductFilm, ProductTab, Quote, VideoTestimonial, WorkChapter } from '@/content/schema'
+import { site } from '@/content/site'
+import type { Faq, WorkChapter } from '@/content/schema'
 
 /** Absolute URL for a site path or an already absolute link. */
 export function absoluteUrl(pathOrUrl: string): string {
@@ -8,68 +8,33 @@ export function absoluteUrl(pathOrUrl: string): string {
 }
 
 /** Title for a Work chapter's own URL. */
-export const chapterTitle = (chapter: WorkChapter) => `${chapter.title}: ${chapter.count} ${chapter.unit} | Work by ${site.name}`
+export const chapterTitle = (chapter: WorkChapter) => `${chapter.title} (${chapter.code}) | Case study by ${site.name}`
 
 /**
- * schema.org structured data for a Work chapter: a CollectionPage whose main entity is the list of
- * builds, each linking to its live page and picture. Serialized safe for an inline <script>.
+ * schema.org structured data for a project's case study: a WebPage about one CreativeWork, linking to
+ * its live page and capture. Serialized safe for an inline <script>.
  */
 export function chapterJsonLd(chapter: WorkChapter, path: string): string {
-  const person = { '@type': 'Person', name: site.name, url: site.url, jobTitle: site.role }
-  const builds = chapter.items.length
-    ? chapter.items.map((item) => ({
-        '@type': chapter.id === 'apps' ? 'SoftwareApplication' : 'CreativeWork',
-        name: item.name,
-        description: item.summary,
-        ...(item.href ? { url: absoluteUrl(item.href) } : {}),
-        ...(item.image ? { image: absoluteUrl(item.image.src) } : {}),
-        ...(chapter.id === 'apps' ? { applicationCategory: 'MobileApplication' } : {}),
-        creator: person,
-      }))
-    : [
-        {
-          '@type': 'CreativeWork',
-          name: chapter.title,
-          description: chapter.description,
-          ...(chapter.link ? { url: absoluteUrl(chapter.link.href) } : {}),
-          ...(chapter.lead ? { image: absoluteUrl(chapter.lead.src) } : {}),
-          creator: person,
-        },
-      ]
-
+  const live = chapter.caseStudy.links[0]
+  const picture = chapter.tile ?? chapter.caseStudy.evidence[0]
   const data = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: chapter.title,
+    '@type': 'WebPage',
+    name: `${chapter.title}: case study`,
     description: chapter.description,
     url: absoluteUrl(path),
     isPartOf: { '@type': 'WebSite', name: `${site.name} - ${site.brand}`, url: site.url },
-    author: person,
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: builds.length,
-      itemListElement: builds.map((item, i) => ({ '@type': 'ListItem', position: i + 1, item })),
+    about: {
+      '@type': 'CreativeWork',
+      name: chapter.title,
+      description: chapter.description,
+      ...(live ? { url: live.href } : {}),
+      ...(picture ? { image: absoluteUrl(picture.src) } : {}),
+      creator: { '@type': 'Person', '@id': `${site.url}/#person`, name: site.name },
     },
   }
   // "<" escaped so a value can never close the script element early.
   return JSON.stringify(data).replace(/</g, '\\u003c')
-}
-
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const pad2 = (n: number) => String(n).padStart(2, '0')
-
-/** "May 4, 2026" -> "2026-05-04". Parsed by hand: Date() would read it as local midnight and shift the day in UTC. */
-export function isoDay(display: string): string {
-  const m = /^([A-Z][a-z]{2})[a-z]* (\d{1,2}), (\d{4})$/.exec(display)
-  const month = m ? MONTHS.indexOf(m[1]!) : -1
-  if (!m || month < 0) throw new Error(`isoDay: unreadable date "${display}"`)
-  return `${m[3]}-${pad2(month + 1)}-${pad2(Number(m[2]))}`
-}
-
-/** "0:32" -> "PT0M32S" (ISO 8601 duration). */
-export function isoDuration(clock: string): string {
-  const [min, sec] = clock.split(':').map(Number)
-  return `PT${min}M${sec}S`
 }
 
 const person = () => ({ '@type': 'Person', '@id': `${site.url}/#person`, name: site.name, url: site.url, jobTitle: site.role })
@@ -84,73 +49,26 @@ function breadcrumbs(path: string, name: string) {
   }
 }
 
-function videoObject(v: { name: string; description: string; thumbnail: string; src: string; duration: string; published: string }) {
-  return {
-    '@type': 'VideoObject',
-    name: v.name,
-    description: v.description,
-    thumbnailUrl: absoluteUrl(v.thumbnail),
-    contentUrl: absoluteUrl(v.src),
-    uploadDate: v.published,
-    duration: isoDuration(v.duration),
-  }
-}
-
-type PersonLd = { description: string; skills: string[]; credential: { name: string; id: string; url?: string }; sameAs: string[]; companyUrl: string }
+type PersonLd = { description: string; skills: string[]; sameAs: string[] }
 
 /**
- * Home's About section: you as a Person (the `#person` node the other pages point at), with your
- * certification as a credential and the profiles that confirm who you are (content/site.ts).
+ * Home's Experience section: Allan as a Person (the `#person` node the other pages point at), with the
+ * profiles that confirm who he is. No credential node: none is claimed without evidence.
  */
-export function personJsonLd({ description, skills, credential, sameAs, companyUrl }: PersonLd): string {
+export function personJsonLd({ description, skills, sameAs }: PersonLd): string {
   return serialize([
     {
       ...person(),
       description,
-      image: absoluteUrl(site.avatar.src),
-      address: { '@type': 'PostalAddress', addressCountry: site.countryCode },
-      worksFor: { '@type': 'Organization', name: site.brand, url: companyUrl },
+      address: { '@type': 'PostalAddress', addressLocality: 'Cagayan de Oro', addressCountry: site.countryCode },
+      worksFor: { '@type': 'Organization', name: site.brand, url: site.url },
       knowsAbout: skills,
-      hasCredential: {
-        '@type': 'EducationalOccupationalCredential',
-        name: credential.name,
-        credentialCategory: 'certification',
-        identifier: credential.id,
-        ...(certification.issuer ? { recognizedBy: { '@type': 'Organization', name: certification.issuer } } : {}),
-        ...(credential.url ? { url: credential.url } : {}),
-      },
       sameAs,
     },
   ])
 }
 
 const serialize = (graph: object[]) => JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')
-
-type ShowcaseLd = { path: string; name: string; description: string; url: string; rooms: ProductTab[]; film: ProductFilm; faq: Faq[] }
-
-/** Showcase page: the product as a SoftwareApplication, its film, the visible FAQ and the breadcrumb. */
-export function showcaseJsonLd({ path, name, description, url, rooms, film, faq }: ShowcaseLd): string {
-  return serialize([
-    {
-      '@type': 'SoftwareApplication',
-      name,
-      description,
-      url,
-      sameAs: [url],
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web browser',
-      featureList: rooms.map((r) => `${r.label}: ${r.body}`),
-      screenshot: rooms.map((r) => absoluteUrl(r.image.src)),
-      creator: person(),
-    },
-    videoObject({ name: film.name, description: film.description, thumbnail: film.poster.src, src: film.src, duration: film.duration, published: film.published }),
-    {
-      '@type': 'FAQPage',
-      mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
-    },
-    breadcrumbs(path, name),
-  ])
-}
 
 type ContactLd = { path: string; title: string; description: string; faq: Faq[] }
 
@@ -170,44 +88,5 @@ export function contactJsonLd({ path, title, description, faq }: ContactLd): str
       mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
     },
     breadcrumbs(path, 'Contact'),
-  ])
-}
-
-type ProofLd = { path: string; title: string; description: string; quotes: Quote[]; videos: VideoTestimonial[] }
-
-/**
- * Proof page: every community note as a Quotation and every clip as a VideoObject. Deliberately no
- * Review or AggregateRating: reviews a site publishes about itself are not eligible for stars.
- */
-export function proofJsonLd({ path, title, description, quotes, videos }: ProofLd): string {
-  return serialize([
-    {
-      '@type': 'WebPage',
-      '@id': absoluteUrl(path),
-      name: title,
-      description,
-      url: absoluteUrl(path),
-      about: person(),
-      hasPart: [
-        ...quotes.map((q) => ({
-          '@type': 'Quotation',
-          text: q.text,
-          creator: { '@type': 'Person', name: q.name },
-          dateCreated: isoDay(q.date),
-          about: { '@id': `${site.url}/#person` },
-        })),
-        ...videos.map((v) =>
-          videoObject({
-            name: v.label,
-            description: `A video testimonial from a client of ${site.name}.`,
-            thumbnail: v.poster,
-            src: v.src,
-            duration: v.duration,
-            published: v.published,
-          }),
-        ),
-      ],
-    },
-    breadcrumbs(path, 'Proof'),
   ])
 }

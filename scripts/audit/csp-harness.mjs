@@ -3,7 +3,7 @@
 // route and a demo page in Chromium, and fails on any CSP refusal or page error.
 // Usage: npm run build && node scripts/audit/csp-harness.mjs
 import { createServer } from 'node:http'
-import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs'
+import { readFileSync, existsSync, statSync } from 'node:fs'
 import { extname, join } from 'node:path'
 import { chromium } from 'playwright'
 
@@ -23,12 +23,13 @@ const server = createServer((req, res) => {
   res.end(readFileSync(file))
 }).listen(5199)
 
-const demos = ['funnels', 'plans', 'sites'].flatMap((d) => readdirSync(join(dist, 'demos', d)).filter((f) => f.endsWith('.html')).map((f) => `/demos/${d}/${f}`))
-const ROUTES = ['/', '/proof', '/showcase', '/contact', '/privacy', '/terms', '/work/websites', '/no-such-page', ...demos]
+const ROUTES = ['/', '/contact', '/privacy', '/terms', '/work/cleaning-kits', '/work/payroll', '/work/qr-checkin', '/no-such-page']
 const browser = await chromium.launch()
 const failures = []
 for (const route of ROUTES) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+  // A saved dark pick: the inline bootstrap in index.html must apply it, which proves the CSP hash lets it run.
+  await page.addInitScript(() => localStorage.setItem('pv2-theme', 'dark'))
   const bad = []
   page.on('console', (m) => /Content Security Policy|Refused to/i.test(m.text()) && bad.push(m.text().slice(0, 160)))
   page.on('pageerror', (e) => bad.push(`pageerror ${e.message}`))

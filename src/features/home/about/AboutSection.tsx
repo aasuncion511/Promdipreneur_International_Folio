@@ -1,110 +1,86 @@
-import { ArrowUpRight, MapPin } from '@phosphor-icons/react'
-import { aboutSection, capabilities, credentials, type AboutCredential } from '@/content/about'
-import { certification, externalLinks, socials } from '@/content/site'
+import type { Icon } from '@phosphor-icons/react'
+import { Handshake, Storefront, Truck, UsersThree } from '@phosphor-icons/react'
+import { aboutSection, earlier, perspectives, roles, usNote, type Perspective } from '@/content/about'
+import { site, socials } from '@/content/site'
 import { personJsonLd } from '@/lib/seo'
 import './about.css'
 
-const pad2 = (n: number) => String(n).padStart(2, '0')
+const ICONS: Record<Perspective['id'], Icon> = {
+  owner: Storefront,
+  staff: UsersThree,
+  customer: Handshake,
+  supplier: Truck,
+}
 
 const personLd = personJsonLd({
   description: aboutSection.lede,
-  skills: capabilities.map((c) => c.title),
-  credential: { name: certification.title, id: certification.detail.replace(/^(Member|Credential) ID /, ''), url: certification.href },
-  sameAs: [...socials.filter((s) => !s.partner).map((s) => s.href), ...(certification.href ? [certification.href] : [])],
-  companyUrl: externalLinks.company,
+  skills: ['CRM implementation', 'Workflow automation', 'Business process design', 'GoHighLevel', 'Google Apps Script', 'Operations management'],
+  sameAs: socials.map((s) => s.href),
 })
 
-function Credential({ c }: { c: AboutCredential }) {
-  const body = (
-    <>
-      <span className="ab__cred-mark">
-        {c.image ? <img className={c.imageDark ? 'only-light' : undefined} src={c.image.src} alt="" width={c.image.width} height={c.image.height} loading="lazy" decoding="async" /> : <MapPin size={16} weight="fill" aria-hidden />}
-        {c.imageDark ? <img className="only-dark" src={c.imageDark.src} alt="" width={c.imageDark.width} height={c.imageDark.height} loading="lazy" decoding="async" /> : null}
-      </span>
-      <span className="ab__cred-copy">
-        <b>{c.title}</b>
-        <small>{c.detail}</small>
-      </span>
-    </>
-  )
-  return c.href ? (
-    <a className="ab__cred" href={c.href} target="_blank" rel="noopener noreferrer">
-      {body}
-      <ArrowUpRight className="ab__cred-go" size={15} weight="bold" aria-hidden />
-    </a>
-  ) : (
-    <span className="ab__cred">{body}</span>
-  )
-}
-
 /**
- * About, "The floor": the desk illustration set large, standing on a
- * hairline floor that runs edge to edge, the story set over its space; the four roles with their
- * tools as raised paper keys and the credentials sit below the floor. The picture rises onto the
- * floor as it scrolls in (CSS scroll-driven, compositor only; still under reduced motion).
+ * Experience: the differentiator. Four business perspectives (owner, staff, customer, supplier), each
+ * with what it taught, then a short selected timeline that marks the roles with US-based stakeholders.
+ * Not a résumé: the point is that the systems come from someone who has run the work.
  */
 export function AboutSection() {
   const s = aboutSection
   return (
     <section id="about" className="ab" aria-labelledby="ab-title">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: personLd }} />
-      <header>
+      <header className="ab__head">
         <p className="wk-eyebrow">{s.eyebrow}</p>
         <h2 id="ab-title" className="wk-title">
           <span>{s.titleThin}</span> <span className="wk-title__bold">{s.titleBold}</span>
         </h2>
         <p className="ab__lede">{s.lede}</p>
+        <p className="ab__lead">{s.lead}</p>
       </header>
 
-      <div className="ab__stage">
-        <p className="ab__lead">
-          {s.lead} <span>{s.leadQuiet}</span>
-        </p>
-        <div className="ab__pic">
-          <img
-            src={s.picture.src}
-            srcSet={s.picture.srcSet}
-            sizes="auto, (min-width: 1024px) 46vw, 92vw"
-            alt={s.picture.alt}
-            width={s.picture.width}
-            height={s.picture.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-
-      <div className="ab__below">
-        <p className="ab__note">
-          <strong>{s.note.company}</strong>, and{' '}
-          <a href={s.note.product.href} target="_blank" rel="noopener noreferrer">
-            {s.note.product.label}
-          </a>{' '}
-          {s.note.rest}
-        </p>
-        <ul className="ab__caps">
-          {capabilities.map((c, i) => (
-            <li key={c.title} className="ab__cap">
-              <span className="ab__keys">
-                {c.tools.map((t) => (
-                  <span key={t.name} className="ab__key" title={t.name}>
-                    <img src={t.logo} alt={t.name} width={20} height={20} loading="lazy" decoding="async" />
-                  </span>
-                ))}
+      <h3 className="ab__sub">{s.perspectivesTitle}</h3>
+      <ul className="ab__persp">
+        {perspectives.map((p) => {
+          const Glyph = ICONS[p.id]
+          return (
+            <li key={p.id} className="ab__card">
+              <span className="ab__icon" aria-hidden>
+                <Glyph size={22} weight="duotone" />
               </span>
-              <span className="ab__cap-title">{c.title}</span>
-              <span className="ab__cap-i" aria-hidden>
-                {pad2(i + 1)}
+              <h4>{p.title}</h4>
+              <p>{p.body}</p>
+            </li>
+          )
+        })}
+      </ul>
+
+      <div className="ab__time">
+        <div className="ab__time-head">
+          <h3 className="ab__sub">{s.timelineTitle}</h3>
+          <p className="ab__legend">
+            <span className="ab__us">US</span> {usNote}
+          </p>
+        </div>
+        <ol className="ab__roles">
+          {roles.map((r) => (
+            <li key={r.org + r.title} className="ab__role">
+              <span className="ab__period">{r.period}</span>
+              <span className="ab__what">
+                <b>{r.title}</b>
+                <span className="ab__org">
+                  {r.org}
+                  {r.us ? (
+                    <span className="ab__us" title={usNote}>
+                      US
+                    </span>
+                  ) : null}
+                </span>
+                <span className="ab__detail">{r.detail}</span>
               </span>
             </li>
           ))}
-        </ul>
-      </div>
-
-      <div className="ab__creds">
-        {credentials.map((c) => (
-          <Credential key={c.id} c={c} />
-        ))}
+        </ol>
+        <p className="ab__earlier">{earlier}</p>
+        <p className="ab__based">Based in {site.location}.</p>
       </div>
     </section>
   )

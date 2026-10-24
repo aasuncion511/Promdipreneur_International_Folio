@@ -1,65 +1,58 @@
-import type { Image, ToolMark } from './schema'
-import { certification, externalLinks, site } from './site'
-import { tools } from './tools'
+import { site } from './site'
 
 /**
- * The Home About section: the desk illustration stands on a hairline floor with the lead over its
- * space; roles with tool logos as raised keys, credentials below.
+ * The Home Experience section: four business perspectives, then a short selected timeline.
+ * The 20+ years are business and operations experience, not AI or automation experience.
  */
 export const aboutSection = {
-  eyebrow: 'About',
-  titleThin: "Hi, I'm",
-  titleBold: `${site.name}.`,
-  lede: 'PLACEHOLDER - tell me what to put here: one sentence on what you do and for whom.',
-  lead: 'PLACEHOLDER - tell me what to put here: your background.',
-  leadQuiet: 'PLACEHOLDER - tell me what to put here: what you do now.',
-  note: {
-    company: `${site.brand} is my company`,
-    product: { label: 'Your Product', href: externalLinks.showcase },
-    rest: 'PLACEHOLDER - tell me what to put here: one sentence on how the product relates to your company, or delete this note.',
-  },
-  picture: {
-    src: '/images/profile/desk.webp',
-    srcSet: '/images/profile/800/desk.webp 800w, /images/profile/desk.webp 1200w',
-    alt: `Illustration of ${site.name} at a desk, working at a monitor with a coffee beside them`,
-    width: 1200,
-    height: 889,
-  } satisfies Image,
+  eyebrow: 'Experience',
+  titleThin: '20+ years',
+  titleBold: 'inside the business.',
+  lede: `I’m ${site.fullName}. Before I built systems, I ran the work they organize: sales teams, warehouses, deliveries, crews, suppliers and payroll, including years reporting to US-based leadership.`,
+  lead: 'So when I look at your process, I see it from every side of the counter.',
+  perspectivesTitle: 'Four perspectives I design from',
+  timelineTitle: 'Selected roles',
 }
 
-export const capabilities: { title: string; tools: ToolMark[] }[] = [
-  { title: 'Role One', tools: [tools.toolA, tools.toolB, tools.toolC] },
-  { title: 'Role Two', tools: [tools.toolD, tools.toolE, tools.toolF, tools.toolG, tools.toolH] },
-  { title: 'Role Three', tools: [tools.toolD, tools.toolI, tools.toolJ, tools.toolK, tools.toolL] },
-  { title: 'Role Four', tools: [tools.toolF, tools.toolG, tools.toolH] },
-]
+export type Perspective = { id: 'owner' | 'staff' | 'customer' | 'supplier'; title: string; body: string }
 
-export type AboutCredential = {
-  id: 'cert' | 'place' | 'community' | 'partner'
-  title: string
-  detail: string
-  image?: Image
-  /** A dark-theme version of the mark, when the light one would vanish on a dark ground (or the reverse). */
-  imageDark?: Image
-  href?: string
-}
-
-export const credentials: AboutCredential[] = [
-  { id: 'cert', title: certification.title, detail: certification.detail, image: { ...certification.image!, alt: '' } },
-  { id: 'place', title: `Based ${site.timePlace}`, detail: 'Your time zone · Your hours' },
+export const perspectives: Perspective[] = [
   {
-    id: 'community',
-    title: 'Your Community',
-    detail: 'Your role',
-    href: '#',
-    image: { src: '/images/badges/64/community.webp', alt: '', width: 64, height: 64 },
+    id: 'owner',
+    title: 'The owner',
+    body: 'I have signed payroll, chased receivables and made the call on stock. I design for the person who has to see where work is stuck.',
   },
   {
-    id: 'partner',
-    title: 'Your Partner',
-    detail: 'Your role',
-    href: '#',
-    image: { src: '/images/badges/64/partner-light.webp', alt: '', width: 64, height: 64 },
-    imageDark: { src: '/images/badges/64/partner.webp', alt: '', width: 64, height: 64 },
+    id: 'staff',
+    title: 'The staff',
+    body: 'I have written SOPs for teams who had to follow them on a busy day. A step that fights how people actually work gets skipped.',
+  },
+  {
+    id: 'customer',
+    title: 'The customer',
+    body: 'Quotes, follow-ups, delivery and after-sales. I know the moments a buyer waits too long, and then goes elsewhere.',
+  },
+  {
+    id: 'supplier',
+    title: 'The supplier',
+    body: 'Procurement, importation, warehousing and vendor terms. Handoffs between companies are where orders break first.',
   },
 ]
+
+export type Role = { period: string; title: string; org: string; detail: string; us?: true }
+
+export const roles: Role[] = [
+  { period: '2024 – now', title: 'Founder, CRM and Business Automation Consultant', org: 'PromdiPreneur BASA Consultancy', detail: 'Requirements, workflow architecture, CRM, customer journeys, implementation and documentation.' },
+  { period: '2024 – now', title: 'President', org: 'AJDA Enterprises / Fresh Start Cleaning Services', detail: 'Quotations, clients, suppliers, staff deployment and service operations.' },
+  { period: '2019 – 2024', title: 'President', org: 'AJDA Industrial Supply', detail: 'Nationwide B2B supply: procurement, vendors, delivery and after-sales.' },
+  { period: '2020 – 2023', title: 'Business Development Consultant', org: 'BEPIC Philippines', detail: 'Local operations setup, compliance, staffing, order processing and distributor support.', us: true },
+  { period: '2017 – 2019', title: 'President and Co-Founder', org: 'MCM Global Solutions / Distribution', detail: 'B2B payments and travel platform: translated requirements, coordinated developers and API partners.' },
+  { period: '2016 – 2018', title: 'Director of Operations', org: 'Javita Philippines', detail: 'Importation, distribution, warehousing, inventory and SOPs, reporting to US leadership.', us: true },
+  { period: '2014 – 2016', title: 'Operations and Product Manager', org: '5LINX Mabuhay', detail: 'Startup operations, delivery systems, controls, forecasting and SOPs.', us: true },
+]
+
+/** Older roles, one line. */
+export const earlier =
+  'Earlier: National Sales Manager at Victory Global (branches, distributors and sales programs); General Manager at Prime Adventure Travel & Tours (concept to launch, with sales, accounting and monitoring systems); construction project coordination, including BOTEYJU at SM Davao; customer service, supervision and business development.'
+
+export const usNote = 'US-based company or stakeholders'

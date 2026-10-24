@@ -32,6 +32,31 @@
 .fl__head .wk-eyebrow {
   margin-bottom: 12px;
 }
+/* The diagram is an example, not a running system: said in plain words, right under the title. */
+.fl__note {
+  display: flex;
+  gap: 8px;
+  max-width: 70ch;
+  margin: 12px 0 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.fl__note::before {
+  content: 'Example';
+  flex: none;
+  align-self: start;
+  margin-top: 1px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--earth-soft);
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
 
 .fl__grid {
   display: grid;

@@ -1,21 +1,25 @@
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
-import { ArrowRight, ArrowUpRight, X } from '@phosphor-icons/react'
+import { ArrowRight, ArrowUpRight, Gear, User, X } from '@phosphor-icons/react'
 import { HeadMeta } from '@/app/PageMeta'
 import { chapterPath, workChapters } from '@/content/home'
-import type { WorkChapter, WorkItem } from '@/content/schema'
+import type { WorkChapter } from '@/content/schema'
 import { gsap, MOTION_CONDITIONS, spring } from '@/lib/motion/gsap'
 import { chapterJsonLd, chapterTitle } from '@/lib/seo'
+import { QrCheckinIllustration } from './QrCheckinIllustration'
 import { useSheet } from './use-sheet'
 import './work-sheet.css'
 
 type SheetState = { sheet?: boolean } | null
 
+const pad2 = (n: number) => String(n).padStart(2, '0')
+
 /**
- * The showcase for one Work chapter, at its own URL (/work/<chapter>) so it can be shared, indexed
- * and opened directly. A native modal <dialog> (focus trap, Escape, top layer) holding a sheet that
- * rises over Home. Closing goes back in history when the visitor came from Home, so Back closes it
- * too. The last chapter stays rendered while the sheet leaves.
+ * The case study for one project, at its own URL (/work/<project>) so it can be shared, indexed and
+ * opened directly. A native modal <dialog> (focus trap, Escape, top layer) holding a sheet that rises
+ * over Home. Closing goes back in history when the visitor came from Home, so Back closes it too.
+ * The sheet answers six questions in order: problem, what was built, Allan's role, the workflow,
+ * why it matters, and the evidence (each picture labelled with what it proves).
  */
 export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
   const navigate = useNavigate()
@@ -34,7 +38,7 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
     onClosed: () => setShown(null),
   })
 
-  // New chapter (opened, or "Next" inside the sheet): back to the top and bring the builds in.
+  // New chapter (opened, or "Next" inside the sheet): back to the top and bring the blocks in.
   const bodyRef = useRef<HTMLDivElement>(null)
   const headRef = useRef<HTMLElement>(null)
   useEffect(() => {
@@ -90,26 +94,26 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
           <>
             <header ref={headRef} className="sh__head" onPointerDown={onDragStart}>
               <div>
-                <p className="wk-count">
-                  {shown.count} {shown.unit}
+                <p className="sh__meta">
+                  <span className="sh__code">{shown.code}</span>
+                  <span>{shown.kind}</span>
                 </p>
                 <h2 id="sh-title" className="sh__title">
                   {shown.title}
                 </h2>
               </div>
-              <button type="button" className="sh__close" onClick={requestClose} aria-label="Close">
+              <button type="button" className="sh__close" onClick={requestClose} aria-label="Close case study">
                 <X size={20} weight="bold" aria-hidden />
               </button>
             </header>
 
             <div ref={bodyRef} className="sh__body" onScroll={onBodyScroll}>
-              <p className="sh__intro">{shown.description}</p>
-              {shown.lead ? <Single chapter={shown} /> : shown.items.some((item) => item.image) ? <Showcase items={shown.items} /> : <Groups items={shown.items} />}
+              <CaseStudyBody chapter={shown} />
 
               {next && next !== shown ? (
                 <nav className="sh__next" aria-label="More work" data-reveal>
                   <Link to={chapterPath(next.id)} replace state={location.state} preventScrollReset>
-                    <span className="wk-count">Next</span>
+                    <span className="wk-count">Next · {next.code}</span>
                     <span className="sh__next-title">{next.title}</span>
                     <ArrowRight size={22} weight="bold" aria-hidden />
                   </Link>
@@ -123,125 +127,122 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
   )
 }
 
-/** Picture-led builds: the first one leads in a wide row, the rest in a grid. */
-function Showcase({ items }: { items: WorkItem[] }) {
-  // Items with a `group` (Websites) render as one titled grid per group, in first-seen order.
-  const groups = [...new Set(items.map((item) => item.group ?? ''))]
+function CaseStudyBody({ chapter }: { chapter: WorkChapter }) {
+  const cs = chapter.caseStudy
   return (
-    <div className="sh__sets">
-      {groups.map((group, gi) => (
-        <section key={group} className="sh__set">
-          {group ? (
-            <h3 className="sh__group-title" data-reveal>
-              {group}
-            </h3>
-          ) : null}
-          <Grid items={items.filter((item) => (item.group ?? '') === group)} lead={gi === 0} />
+    <article className="cs">
+      <p className="cs__intro" data-reveal>
+        {chapter.description}
+      </p>
+      <p className="cs__stack" data-reveal>
+        {chapter.stack.map((tool) => (
+          <span key={tool}>{tool}</span>
+        ))}
+      </p>
+
+      <div className="cs__card" data-reveal>
+        <section className="cs__cell cs__cell--problem" aria-labelledby="cs-problem">
+          <h3 id="cs-problem" className="cs__label">
+            <span>01</span> The problem
+          </h3>
+          <p>{cs.problem}</p>
         </section>
-      ))}
-    </div>
-  )
-}
-
-function Grid({ items, lead }: { items: WorkItem[]; lead: boolean }) {
-  return (
-    <ul className="sh__grid">
-      {items.map((item, i) => (
-        <li key={item.id} className={lead && i === 0 ? 'sh__item sh__item--lead' : 'sh__item'} data-reveal>
-          <ItemLink item={item}>
-            <span className={item.href ? 'sh__shot' : 'sh__shot sh__shot--contain'}>
-              {item.image ? (
-                <img
-                  src={item.image.src}
-                  alt={item.image.alt}
-                  width={item.image.width}
-                  height={item.image.height}
-                  loading={i < 3 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              ) : null}
-            </span>
-            <span className="sh__cap">
-              <span className="wk-count">
-                {item.kicker}
-                {item.status ? <span className="sh__status">{item.status}</span> : null}
-              </span>
-              <h3 className="sh__name">
-                {item.name}
-                {item.href ? <ArrowUpRight size={16} weight="bold" aria-hidden /> : null}
-              </h3>
-              <span className="sh__sum">{item.summary}</span>
-            </span>
-          </ItemLink>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-/** Builds with no pictures (side projects and experiments): grouped rows. */
-function Groups({ items }: { items: WorkItem[] }) {
-  const groups = [...new Set(items.map((item) => item.kicker))]
-  return (
-    <div className="sh__groups">
-      {groups.map((group) => (
-        <section key={group} className="sh__group" data-reveal>
-          <h3 className="sh__group-title">{group}</h3>
-          <ul>
-            {items
-              .filter((item) => item.kicker === group)
-              .map((item) => (
-                <li key={item.id} className="sh__row">
-                  <h4 className="sh__name">{item.name}</h4>
-                  <p className="sh__sum">{item.summary}</p>
-                  <p className="wk-count">
-                    {item.stack}
-                    {item.status ? <span className="sh__status">{item.status}</span> : null}
-                  </p>
-                </li>
-              ))}
+        <section className="cs__cell" aria-labelledby="cs-built">
+          <h3 id="cs-built" className="cs__label">
+            <span>02</span> What I built
+          </h3>
+          <ul className="cs__list">
+            {cs.built.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </section>
-      ))}
-    </div>
-  )
-}
+        <section className="cs__cell" aria-labelledby="cs-role">
+          <h3 id="cs-role" className="cs__label">
+            <span>03</span> My role
+          </h3>
+          <ul className="cs__role">
+            {cs.role.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
-/** One build with a gallery (the featured project). */
-function Single({ chapter }: { chapter: WorkChapter }) {
-  const { lead, gallery = [], link } = chapter
-  return (
-    <div className="sh__single">
-      {lead ? (
-        <a className="sh__shot sh__shot--lead" href={link?.href ?? lead.src} target="_blank" rel="noopener" data-reveal>
-          <img src={lead.src} alt={lead.alt} width={lead.width} height={lead.height} decoding="async" />
-        </a>
-      ) : null}
-      {link ? (
-        <a className="btn-line sh__live" href={link.href} target="_blank" rel="noopener" data-reveal>
-          {link.label}
-          <ArrowUpRight size={16} weight="bold" aria-hidden />
-        </a>
-      ) : null}
-      <ul className="sh__gallery">
-        {gallery.map((img) => (
-          <li key={img.src} data-reveal>
-            <a className="sh__shot" href={img.src} target="_blank" rel="noopener">
-              <img src={img.src} alt={img.alt} width={img.width} height={img.height} loading="lazy" decoding="async" />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+      <section className="cs__block" aria-labelledby="cs-flow" data-reveal>
+        <h3 id="cs-flow" className="cs__label">
+          <span>04</span> How the workflow connects
+        </h3>
+        <ol className="cs__flow">
+          {cs.flow.map((step, i) => (
+            <li key={step.label} data-by={step.by}>
+              <span className="cs__flow-n">{pad2(i + 1)}</span>
+              <span className="cs__flow-by">
+                {step.by === 'system' ? <Gear size={13} weight="bold" aria-hidden /> : <User size={13} weight="bold" aria-hidden />}
+                {step.by === 'system' ? 'System' : 'Person'}
+              </span>
+              <b>{step.label}</b>
+              <span className="cs__flow-note">{step.note}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-/** A live build opens in a new tab; one without a public link is a plain block. */
-function ItemLink({ item, children }: { item: WorkItem; children: ReactNode }) {
-  if (!item.href) return <div className="sh__link">{children}</div>
-  return (
-    <a className="sh__link" href={item.href} target="_blank" rel="noopener">
-      {children}
-    </a>
+      <section className="cs__block cs__matters" aria-labelledby="cs-matters" data-reveal>
+        <h3 id="cs-matters" className="cs__label">
+          <span>05</span> Why it matters operationally
+        </h3>
+        <p>{cs.matters}</p>
+      </section>
+
+      <section className="cs__block" aria-labelledby="cs-evidence">
+        <h3 id="cs-evidence" className="cs__label" data-reveal>
+          <span>06</span> Evidence you can check
+        </h3>
+        {cs.links.length ? (
+          <p className="cs__links" data-reveal>
+            {cs.links.map((link, i) => (
+              <a key={link.href} className={i === 0 ? 'btn-solid' : 'btn-line'} href={link.href} target="_blank" rel="noopener">
+                {link.label}
+                <ArrowUpRight size={16} weight="bold" aria-hidden />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ))}
+          </p>
+        ) : null}
+        {cs.illustration === 'qr-checkin' ? <QrCheckinIllustration /> : null}
+        {cs.evidence.length ? (
+          <ul className="cs__evidence">
+            {cs.evidence.map((shot, i) => (
+              <li key={shot.src} className={i === 0 ? 'cs__shot cs__shot--lead' : 'cs__shot'} data-reveal>
+                <a href={shot.src} target="_blank" rel="noopener" className="cs__frame" aria-label={`${shot.caption}, full size (opens in a new tab)`}>
+                  <img
+                    src={shot.src}
+                    srcSet={shot.srcSet}
+                    sizes={i === 0 ? '(min-width: 1024px) 1080px, 92vw' : '(min-width: 1024px) 520px, 92vw'}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </a>
+                <p className="cs__caption">
+                  <span className="cs__scope" data-scope={shot.scope}>
+                    {shot.scope}
+                  </span>
+                  {shot.caption}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        <ul className="cs__notes" data-reveal>
+          {cs.notes.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </section>
+    </article>
   )
 }

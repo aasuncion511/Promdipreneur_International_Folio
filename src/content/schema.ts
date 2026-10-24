@@ -101,9 +101,48 @@ export type AiGroup = {
   builds: AiBuild[]
 }
 
-/** One chapter of the Home Work section: a group of builds with its covers. */
+/** What a picture proves. A landing-page capture proves the public presentation, never the backend. */
+export type EvidenceScope = 'Live public page' | 'Public demo, sample data' | 'Illustration, synthetic data'
+
+export type Evidence = Image & {
+  caption: string
+  scope: EvidenceScope
+}
+
+/** One step of a project's workflow, shown as a connected strip in the chapter sheet. */
+export type FlowStep = {
+  label: string
+  /** One short line under the label. */
+  note: string
+  /** Who moves it: the person (customer, staff, owner) or the system. */
+  by: 'person' | 'system'
+}
+
+/** The case study inside a chapter sheet: the six questions a visitor asks, in order. */
+export type CaseStudy = {
+  problem: string
+  built: string[]
+  role: string[]
+  flow: FlowStep[]
+  matters: string
+  evidence: Evidence[]
+  links: LinkRef[]
+  /** Scope notes: what the evidence does and does not show. Shown small, never hidden. */
+  notes: string[]
+  /** A drawn illustration instead of (or before) the captures. */
+  illustration?: 'qr-checkin'
+}
+
+/** One chapter of the Home Work section: a project, told as a case study. */
 export type WorkChapter = {
   id: string
+  /** Job-card number shown on the tile and the sheet ("P-01"). */
+  code: string
+  /** What kind of work it is ("Own product", "Own business"). */
+  kind: string
+  /** The tools it runs on, as short names. */
+  stack: string[]
+  caseStudy: CaseStudy
   title: string
   /** One quiet line under the title. */
   line: string

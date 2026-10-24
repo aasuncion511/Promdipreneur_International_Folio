@@ -102,9 +102,21 @@
   width: 100%;
   height: 100%;
 }
-/* The second half of the brand name takes the accent in both themes (a logotype, aria-hidden: the link carries the name). */
-.sb-logo__accent {
-  color: var(--accent);
+/* The wordmark from the real lockup, at its own proportions. Its dark green would vanish on Forest,
+   so there it sits on a cream plate (the logo is never recoloured). */
+.sb-logo__name {
+  display: block;
+  height: 30px;
+}
+.sb-logo__name > img {
+  width: auto;
+  height: 100%;
+}
+:root[data-theme='dark'] .sb-panel:not([data-collapsed='true']) .sb-logo {
+  padding: 4px 12px 4px 6px;
+  margin-block: -4px;
+  background: #f7f7f3;
+  border-radius: 10px;
 }
 
 /* Socials: sit under the role where search used to be. Fade out (and stop taking clicks) on the rail. */
@@ -157,37 +169,20 @@
   transform: scale(0.97);
 }
 
-/* Blue verified check: the seal's cut-out check shows a white disc, ringed in the card color. */
-.sb-pic__check {
-  position: absolute;
-  z-index: 1;
-  right: 2%;
-  bottom: 2%;
+/* The monogram stands in for a portrait: dark green disc, cream initials, the brand's brown ring on hover. */
+.sb-pic__mono {
   display: grid;
   place-items: center;
-  width: 30%;
-  height: 30%;
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: calc(var(--pic) * 0.34);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  user-select: none;
 }
-.sb-pic__check::before {
-  content: '';
-  position: absolute;
-  inset: 22%;
-  border-radius: 50%;
-  background: var(--on-accent);
-}
-.sb-pic__check::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  z-index: -1;
-  border-radius: 50%;
-  background: var(--surface);
-}
-.sb-pic__check > svg {
-  position: relative;
-  width: 100%;
-  height: 100%;
+:root[data-theme='dark'] .sb-pic__mono {
+  background: #004c25;
+  color: #f7f7f3;
 }
 
 .sb-profile__name {
@@ -199,11 +194,12 @@
   white-space: nowrap;
 }
 .sb-profile__role {
+  max-width: 200px;
   margin-top: 2px;
   color: var(--ink-3);
   font-size: 13px;
   line-height: 1.35;
-  white-space: nowrap;
+  text-wrap: balance;
 }
 
 /* The drawer's close button, pinned top right over the band. */

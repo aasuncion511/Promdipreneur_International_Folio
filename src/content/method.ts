@@ -1,13 +1,13 @@
 import type { MethodStep } from './schema'
 
-/** Your method: the three jobs your service does for a client, in order. It names the steps of the Home automation diagram. */
+/** The method: three jobs a system has to do for a service business, in order. It names the steps of the Home workflow diagram. */
 export const method = {
-  eyebrow: 'Your Method',
-  title: 'Attract. Nurture. Convert.',
-  summary: 'PLACEHOLDER - tell me what to put here: one line on the three jobs your work does for a client, in order.',
+  eyebrow: 'The problem I fix',
+  title: 'Capture. Coordinate. Close.',
+  summary: 'Every system I build answers three questions: did we catch the request, did the right person act on it, and did the job finish and get paid.',
   steps: [
-    { name: 'Attract', body: 'PLACEHOLDER - tell me what to put here: one short line on step one.', inputs: ['Input A', 'Input B', 'Input C', 'Input D'] },
-    { name: 'Nurture', body: 'PLACEHOLDER - tell me what to put here: one short line on step two.', inputs: ['Input A', 'Input B', 'Input C'] },
-    { name: 'Convert', body: 'PLACEHOLDER - tell me what to put here: one short line on step three.', inputs: ['Input A', 'Input B', 'Input C'] },
+    { name: 'Capture', body: 'Every inquiry lands in one place with what you need to know, and gets an answer fast.', inputs: ['Forms', 'Chat', 'Messages', 'Calls'] },
+    { name: 'Coordinate', body: 'Quotes, reminders and schedules move without the owner pushing each one.', inputs: ['Quote', 'Follow-up', 'Schedule'] },
+    { name: 'Close', body: 'The job is checked, paid and followed up, and the next booking is asked for.', inputs: ['QA', 'Payment', 'Repeat'] },
   ] satisfies MethodStep[],
 }

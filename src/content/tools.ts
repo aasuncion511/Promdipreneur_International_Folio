@@ -1,39 +1,60 @@
 import type { ToolMark } from './schema'
+import { asset } from './site'
 
-const mark = (name: string, file: string, mono?: true): ToolMark => ({ name, logo: `/images/tools/${file}`, mono })
+const mark = (name: string, file: string, mono?: true): ToolMark => ({ name, logo: asset(`/images/tools/${file}`), mono })
 
 /**
- * Every tool logo the site can show. Pages reference these, never a raw path. The twelve marks are
- * generic placeholders (public/images/tools/tool-01.svg ... tool-12.svg): swap each name and file for a
- * real tool you use. A black one-colour logo takes a third argument, `true`, so it is inverted on dark
- * grounds and never disappears.
+ * Every tool logo the site can show. Pages reference these, never a raw path. Marks come from the
+ * official HighLevel asset, Simple Icons (CC0) and Lobe Icons (MIT), hosted locally. Showing a logo
+ * names a tool Allan works in; it does not imply a certification or partnership.
+ * A black one-colour logo takes a third argument, `true`, so it is inverted on dark grounds.
  */
 export const tools = {
-  toolA: mark('Tool A', 'tool-01.svg'),
-  toolB: mark('Tool B', 'tool-02.svg'),
-  toolC: mark('Tool C', 'tool-03.svg'),
-  toolD: mark('Tool D', 'tool-04.svg'),
-  toolE: mark('Tool E', 'tool-05.svg'),
-  toolF: mark('Tool F', 'tool-06.svg'),
-  toolG: mark('Tool G', 'tool-07.svg'),
-  toolH: mark('Tool H', 'tool-08.svg'),
-  toolI: mark('Tool I', 'tool-09.svg'),
-  toolJ: mark('Tool J', 'tool-10.svg'),
-  toolK: mark('Tool K', 'tool-11.svg'),
-  toolL: mark('Tool L', 'tool-12.svg'),
+  ghl: mark('GoHighLevel', 'highlevel.svg'),
+  sheets: mark('Google Sheets', 'googlesheets.svg'),
+  appsScript: mark('Google Apps Script', 'googleappsscript.svg'),
+  gmail: mark('Gmail', 'gmail.svg'),
+  chatgpt: mark('ChatGPT', 'chatgpt.svg', true),
+  claude: mark('Claude', 'claude.svg'),
+  gemini: mark('Gemini', 'gemini.svg'),
+  manus: mark('Manus', 'manus.svg', true),
+  aiStudio: mark('Google AI Studio', 'google-ai-studio.svg', true),
+  n8n: mark('n8n', 'n8n.svg'),
+  codex: mark('Codex', 'codex.svg'),
+  github: mark('GitHub', 'github.svg', true),
+  make: mark('Make', 'make.svg'),
+  zapier: mark('Zapier', 'zapier.svg'),
 } satisfies Record<string, ToolMark>
 
-/** The daily drivers, in the order you want them shown. */
-export const dailyTools: ToolMark[] = [
-  tools.toolA,
-  tools.toolB,
-  tools.toolC,
-  tools.toolD,
-  tools.toolE,
-  tools.toolF,
-  tools.toolG,
-  tools.toolH,
-  tools.toolI,
-  tools.toolJ,
-  tools.toolK,
+export type ToolGroup = { id: string; title: string; use: string; tools: ToolMark[] }
+
+/** The toolbox, grouped by the job each tool does in a project. No proficiency bars, no percentages. */
+export const toolGroups: ToolGroup[] = [
+  {
+    id: 'crm',
+    title: 'CRM and customer journeys',
+    use: 'Pipelines, forms, calendars, funnels, stores and the follow-up workflows behind them.',
+    tools: [tools.ghl],
+  },
+  {
+    id: 'ops',
+    title: 'Operational tools',
+    use: 'Records, computations, documents and email a team can run without buying new software.',
+    tools: [tools.sheets, tools.appsScript],
+  },
+  {
+    id: 'think',
+    title: 'Thinking and prototyping',
+    use: 'Requirements, process maps, first drafts and quick prototypes before anything is built for real.',
+    tools: [tools.chatgpt, tools.claude, tools.gemini, tools.aiStudio, tools.manus],
+  },
+  {
+    id: 'dev',
+    title: 'Development and collaboration',
+    use: 'AI-assisted development, versioned code and integrations between the tools a client already has.',
+    tools: [tools.codex, tools.github, tools.n8n],
+  },
 ]
+
+/** Shown under the groups as "Also familiar with", never as specialties. */
+export const alsoFamiliar: ToolMark[] = [tools.make, tools.zapier]

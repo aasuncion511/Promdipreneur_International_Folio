@@ -1,3 +1,15 @@
+# Allan Asuncion: independent portfolio build (Claude)
+
+This branch adapts the BrewedOps Portfolio Template V2 into the international portfolio for **Allan Asuncion, PromdiPreneur BASA Consultancy** (Business Systems & Automation Implementer). It is one of two independent builds made for comparison; it shares no code, hosting or configuration with the other.
+
+- What changed and why, what was verified, and what is still needed: [`docs/REVIEW-HANDOFF.md`](docs/REVIEW-HANDOFF.md)
+- Behaviour checks for this build: `npm run build && npm run preview`, then `BASE=http://localhost:5191 node scripts/check-review.mjs`
+- Review build for a hosted viewer (in-memory routing, relative paths): `npm run build:review` writes `dist-review/`
+
+The original template README follows. Where it says "every piece of content is a placeholder", that no longer applies: content lives in `src/content/` and is real. The template's own `check:*` scripts still assert some of the template's placeholder copy and layout, so a few of their checks fail by design; `scripts/check-review.mjs` covers this build.
+
+---
+
 # Portfolio Template V2
 
 A personal portfolio with a floating sidebar that folds into an icon rail, a "signal flow" line background, and one long Home page built from scroll scenes: a reading-band manifesto, a live flow diagram that builds as you scroll, a bento of work chapters that open as sheets with their own URLs, a stacked services deck, an About floor, a proof ledger, a product showcase with a film and walk-through rooms, and a contact plate. Separate phone layout with a top bar and a swipe-to-close drawer. Light and dark themes.

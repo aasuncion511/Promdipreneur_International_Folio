@@ -1,37 +1,46 @@
 /*
- * Home hero. Type sizes use container units (cqi) so the bold line, "MAKE IT YOURS.",
- * always fits the content column whatever the sidebar is doing.
+ * Home hero. Left-aligned, read top to bottom: name and role, the two-line promise, one paragraph,
+ * the booking button, then the five projects as job cards. The headline uses container units (cqi)
+ * so the bold line fills the column whatever the sidebar is doing.
  */
 
 .hero {
+  --gutter: clamp(16px, 3.5vw, 56px);
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   /* svh, not dvh: the hero must not resize while a phone's address bar slides away mid-scroll. */
   min-height: 100svh;
-  padding: 96px 24px;
+  padding: 72px var(--gutter) 56px;
   /* The parting lines travel sideways on scroll; clip them here so the page never scrolls sideways. */
   overflow-x: clip;
-  text-align: center;
+}
+
+.hero__eyebrow {
+  margin: 0 0 22px;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  animation: hero-rise var(--dur-slow) var(--ease-spring) both;
 }
 
 .hero__title {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: 0;
-  /* "MAKE IT YOURS." in Geist 700 at -0.05em is 7.20em wide: 13.05cqi fills ~94% of the column (7.20 x
-     13.05 = 94). The 2.3rem floor keeps the smallest phones' line readable (~265px at 320). To re-measure
-     for your own words: set the bold line in the browser, read its width in em (range width / font-size),
-     and use 94 / that width. Keep the thin line narrower than the bold one, or it overflows. */
-  font-size: clamp(2.3rem, 13.05cqi, 10rem);
-  line-height: 0.86;
+  /* "AUTOMATE THE REST." in Geist 700 at -0.05em measures 9.3em: 10.2cqi fills ~95% of the column.
+     To re-measure for new words: read the bold line's width in em in the browser and use 95 / that width.
+     Keep the thin line narrower than the bold one. The 2rem floor keeps a 320px phone readable. */
+  font-size: clamp(2rem, 10.2cqi, 8.6rem);
+  line-height: 0.88;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   white-space: nowrap;
-  transform-origin: 50% 0;
+  transform-origin: 0 0;
 }
 
 .hero__layer {
@@ -46,35 +55,170 @@
 .hero__line--thin {
   font-weight: 100;
   color: var(--ink);
+  animation-delay: 40ms;
 }
 .hero__line--bold {
   font-weight: 700;
-  color: var(--ink);
-  animation-delay: 90ms;
+  color: var(--accent-ink);
+  animation-delay: 110ms;
 }
 
 .hero__foot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero__sub {
-  max-width: 60ch; /* two lines on desktop */
-  margin: 40px 0 0;
-  color: var(--ink-2);
-  font-family: var(--font-mono);
-  font-size: 15px;
-  line-height: 1.7;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-wrap: balance;
+  display: grid;
+  gap: 0;
   animation: hero-rise var(--dur-slow) var(--ease-spring) 180ms both;
 }
 
-.hero__cta {
-  margin-top: 40px;
-  animation: hero-rise var(--dur-slow) var(--ease-spring) 260ms both;
+.hero__sub {
+  max-width: 62ch;
+  margin: 32px 0 0;
+  color: var(--ink-2);
+  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: -0.006em;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* The brand line, glossed: "diskarte" is Filipino for getting by on wits and improvisation. */
+.hero__tagline {
+  margin: 22px 0 0;
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.hero__tagline > b {
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- The five projects as job cards ---------- */
+
+.hero__proof {
+  margin-top: clamp(28px, 5vh, 48px);
+}
+.hero__proof > ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hero__job {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  height: 100%;
+  padding: 14px 32px 14px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition:
+    border-color 180ms ease,
+    transform var(--dur-base) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-spring);
+}
+.hero__job-code {
+  color: var(--signal-ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.hero__job-title {
+  font-size: 14.5px;
+  font-weight: 620;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.hero__job-kind {
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+.hero__job-go {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  color: var(--ink-3);
+  transition: color 180ms ease, transform var(--dur-press) ease-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero__job:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .hero__job:hover .hero__job-go {
+    color: var(--accent-ink);
+  }
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero__facts > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero__facts > li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+@container (max-width: 860px) {
+  .hero__proof > ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hero__proof li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+@container (max-width: 520px) {
+  .hero__proof > ol {
+    grid-template-columns: 1fr;
+  }
+  .hero__job {
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    padding: 12px 36px 12px 14px;
+  }
+  .hero__job-code {
+    grid-row: span 2;
+    align-self: center;
+  }
+  .hero__job-go {
+    top: 50%;
+    translate: 0 -50%;
+  }
+  .hero__ctas > * {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 /* Starts at 0.1, not 0: Chrome never counts a fully transparent first paint as the Largest Contentful
@@ -92,19 +236,18 @@
   }
 }
 
-/* Phones: the bar above takes 56px, so the hero fills the rest of the first screen. */
+/* Phones: the bar above takes 56px. The hero is as tall as its content (the job cards make it long). */
 @media (max-width: 1023px) {
   .hero {
     min-height: calc(100svh - 56px);
-    padding-block: 64px;
+    padding-block: 40px 48px;
   }
 }
 
 /*
- * Phones and tablets: the scroll exit runs as a CSS scroll timeline, on the compositor, in the same
- * frame as the thumb (a JS scrub trails it). Desktop with a fine pointer runs hero-scene.ts instead.
- * animation-timeline sits in its own, more specific rule: a minifier folds it into the `animation`
- * shorthand otherwise, and the browser drops the whole declaration.
+ * Phones and tablets: the scroll exit of the headline runs as a CSS scroll timeline, on the compositor.
+ * Desktop with a fine pointer runs hero-scene.ts instead. The foot (with the project links) stays put
+ * on phones so nothing tappable moves under a thumb.
  */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and (not ((min-width: 1024px) and (hover: hover) and (pointer: fine))) {
@@ -114,11 +257,7 @@
     .hero .hero__title {
       animation: hero-sink linear both;
     }
-    .hero .hero__foot {
-      animation: hero-leave linear both;
-    }
-    .app .hero .hero__title,
-    .app .hero .hero__foot {
+    .app .hero .hero__title {
       animation-timeline: --hero;
       animation-range: exit 0% exit 100%;
     }
@@ -128,22 +267,14 @@
 @keyframes hero-sink {
   to {
     opacity: 0;
-    transform: translateY(30svh) scale(0.92);
-  }
-}
-
-@keyframes hero-leave {
-  40%,
-  to {
-    opacity: 0;
-    transform: translateY(-40px);
+    transform: translateY(20svh) scale(0.94);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero__eyebrow,
   .hero__line,
-  .hero__sub,
-  .hero__cta {
+  .hero__foot {
     animation: hero-fade 200ms ease both;
   }
 }

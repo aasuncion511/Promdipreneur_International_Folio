@@ -1,65 +1,69 @@
 /*
  * Design tokens. Every color, shadow, radius and motion value in the app comes from here.
- * Brand: #F0F8FF (Alice white) + #2D78C2 (French blue). One accent, no second hue.
- * Contrast (checked): on-accent/accent 4.6:1, accent-ink/bg 5.6:1, ink-3/bg 5.4:1 (4.6:1 on surface-3).
+ * Brand: PromdiPreneur. Cream #F7F7F3 ground, dark green #004C25 ink-accent, bright green #18B957 for
+ * anything "live" or moving, brown #754000 for hand annotations. Light is the default; "Forest" is dark.
+ * Contrast (checked 2026-10-24): ink-3/bg 5.9:1 light, 7.1:1 dark; on-accent/accent 10.2:1 light, 6.7:1 dark.
  */
 
 :root {
   color-scheme: light;
 
   /* Surfaces */
-  --bg: #f0f8ff;
+  --bg: #f7f7f3;
   --surface: #ffffff;
-  --surface-2: #e6f0fa;
-  --surface-3: #d9e7f5;
+  --surface-2: #eef0e8;
+  --surface-3: #e2e7dc;
 
   /* Text */
-  --ink: #0e1b2a;
-  --ink-2: #44566b;
-  --ink-3: #566779; /* 4.6:1 even on --surface-3; #5e6f83 fell to 4.47 on --surface-2 (audit 2026-10-02) */
+  --ink: #0f2418;
+  --ink-2: #3c5145;
+  --ink-3: #526458;
 
-  /* Accent */
-  --accent: #2d78c2;
-  --accent-ink: #2566a6;
-  --accent-deep: #1b4f86; /* pulse heads in the signal-flow background */
-  --accent-soft: rgb(45 120 194 / 0.1);
+  /* Accent: dark green carries buttons, links and focus; bright green marks live signal; brown annotates. */
+  --accent: #004c25;
+  --accent-ink: #004c25;
+  --accent-deep: #18b957; /* pulse heads in the signal-flow background */
+  --accent-soft: rgb(0 76 37 / 0.08);
   --on-accent: #ffffff;
+  --signal: #18b957;
+  --signal-ink: #0b7a37; /* bright green as text on cream (4.9:1) */
+  --signal-soft: rgb(24 185 87 / 0.14);
+  --earth: #754000;
+  --earth-soft: rgb(117 64 0 / 0.09);
   /* Third-party marks: the social keys take these on hover. */
   --brand-facebook: #0866ff;
   --brand-linkedin: #0a66c2;
   --brand-discord: #5865f2;
-  --brand-github: var(--ink); /* one-colour marks follow the ink, so they never vanish on dark */
+  --brand-github: var(--ink);
   --brand-x: var(--ink);
   --knob: #ffffff;
-  --band: var(--accent-soft); /* sidebar banner behind the picture */
+  --band: rgb(0 76 37 / 0.07); /* sidebar banner behind the picture */
 
-  /* Paper: the light ground of the Work cards without a picture. The same in both themes, so they
-     read as one set with the page captures beside them. */
+  /* Paper: the light ground of tool keys and logo faces. The same in both themes, so multicolour
+     marks always sit on the ground they were drawn for. */
   --paper: #ffffff;
-  --paper-2: #eef3f9; /* the lower end of the paper's fall of light */
-  --paper-light: rgb(255 255 255 / 0.95); /* emboss highlight */
-  --paper-bevel: rgb(14 27 42 / 0.07); /* emboss shade */
-  --paper-ink: #0e1b2a;
+  --paper-2: #f1f2ec;
+  --paper-light: rgb(255 255 255 / 0.95);
+  --paper-bevel: rgb(15 36 24 / 0.07);
+  --paper-ink: #0f2418;
 
-  --grid-line: rgb(14 27 42 / 0.035); /* the faint 40px grid behind the automation diagram */
-  --paper-ink-3: #5e6f83;
-  --paper-line: rgb(14 27 42 / 0.08);
-  --paper-tile-shadow: 0 1px 2px rgb(14 27 42 / 0.08), 0 14px 30px -10px rgb(20 60 110 / 0.28);
+  --grid-line: rgb(15 36 24 / 0.04);
+  --paper-ink-3: #526458;
+  --paper-line: rgb(15 36 24 / 0.08);
+  --paper-tile-shadow: 0 1px 2px rgb(15 36 24 / 0.08), 0 14px 30px -10px rgb(0 60 30 / 0.26);
 
-  /* Controls laid over video and screenshots: the same in both themes, since the picture decides the ground. */
   --media-scrim: rgb(10 10 10 / 0.72);
   --on-media: #ffffff;
-  /* Transparent cutouts (the About desk illustration): no rim on light, a faint 1px edge on Onyx. */
   --cutout-rim: none;
 
   /* Lines and depth */
-  --drop-float: drop-shadow(0 1px 1.5px rgb(14 27 42 / 0.06)) drop-shadow(0 16px 28px rgb(20 60 110 / 0.13));
-  --line: rgb(14 27 42 / 0.08);
-  --line-strong: rgb(14 27 42 / 0.14);
-  --scrim: rgb(14 27 42 / 0.32);
-  --shadow-sm: 0 1px 2px rgb(14 27 42 / 0.05);
-  --shadow-md: 0 1px 2px rgb(14 27 42 / 0.04), 0 10px 28px -12px rgb(14 27 42 / 0.14);
-  --shadow-float: 0 2px 6px rgb(14 27 42 / 0.05), 0 24px 56px -20px rgb(20 60 110 / 0.22);
+  --drop-float: drop-shadow(0 1px 1.5px rgb(15 36 24 / 0.06)) drop-shadow(0 16px 28px rgb(0 60 30 / 0.12));
+  --line: rgb(15 36 24 / 0.09);
+  --line-strong: rgb(15 36 24 / 0.16);
+  --scrim: rgb(8 20 13 / 0.38);
+  --shadow-sm: 0 1px 2px rgb(15 36 24 / 0.05);
+  --shadow-md: 0 1px 2px rgb(15 36 24 / 0.04), 0 10px 28px -12px rgb(15 36 24 / 0.16);
+  --shadow-float: 0 2px 6px rgb(15 36 24 / 0.05), 0 24px 56px -20px rgb(0 60 30 / 0.24);
 
   /* Shape */
   --radius-sm: 8px;
@@ -87,32 +91,37 @@
   --dur-slow: 587ms; /* response 0.40s */
 }
 
-/* Dark = "Onyx": neutral near-black, subtle-lift sidebar, neutral banner. */
+/* Dark = "Forest": deep green-black, cream ink, bright green as the accent. */
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-2: #1e1e1e;
-  --surface-3: #2a2a2a;
+  --bg: #0b1610;
+  --surface: #112019;
+  --surface-2: #172a20;
+  --surface-3: #1f3529;
 
-  --ink: #ededed;
-  --ink-2: #a1a1a1;
-  --ink-3: #878787;
+  --ink: #edf2ea;
+  --ink-2: #b0bfb4;
+  --ink-3: #93a598;
 
-  --accent: #2d78c2;
-  --accent-ink: #7db3e8;
-  --accent-deep: #7db3e8;
-  --accent-soft: rgb(45 120 194 / 0.18);
-  --on-accent: #ffffff;
-  --band: rgb(255 255 255 / 0.05);
-  --grid-line: rgb(255 255 255 / 0.03);
+  --accent: #18b957;
+  --accent-ink: #5ad68b;
+  --accent-deep: #18b957;
+  --accent-soft: rgb(24 185 87 / 0.14);
+  --on-accent: #03200e;
+  --signal: #18b957;
+  --signal-ink: #5ad68b;
+  --signal-soft: rgb(24 185 87 / 0.16);
+  --earth: #d9a25c;
+  --earth-soft: rgb(217 162 92 / 0.12);
+  --band: rgb(255 255 255 / 0.04);
+  --grid-line: rgb(255 255 255 / 0.035);
   --cutout-rim: drop-shadow(0 0 0.8px rgb(255 255 255 / 0.5));
 
   --drop-float: drop-shadow(0 0 0.5px rgb(255 255 255 / 0.16)) drop-shadow(0 18px 32px rgb(0 0 0 / 0.55));
-  --line: rgb(255 255 255 / 0.08);
-  --line-strong: rgb(255 255 255 / 0.14);
-  --scrim: rgb(2 6 12 / 0.6);
+  --line: rgb(237 242 234 / 0.09);
+  --line-strong: rgb(237 242 234 / 0.16);
+  --scrim: rgb(2 8 5 / 0.62);
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.5);
   --shadow-float: 0 2px 6px rgb(0 0 0 / 0.3), 0 28px 60px -20px rgb(0 0 0 / 0.65);
@@ -120,14 +129,14 @@
 
 @media (prefers-contrast: more) {
   :root {
-    --ink-2: #22354a;
-    --ink-3: #2f4257;
-    --line: rgb(14 27 42 / 0.3);
-    --line-strong: rgb(14 27 42 / 0.5);
+    --ink-2: #1f3328;
+    --ink-3: #2a3d31;
+    --line: rgb(15 36 24 / 0.3);
+    --line-strong: rgb(15 36 24 / 0.5);
   }
   :root[data-theme='dark'] {
-    --ink-2: #d4d4d4;
-    --ink-3: #bdbdbd;
+    --ink-2: #d6e0d8;
+    --ink-3: #c2d0c6;
     --line: rgb(255 255 255 / 0.3);
     --line-strong: rgb(255 255 255 / 0.5);
   }

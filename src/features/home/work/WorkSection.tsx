@@ -1,17 +1,18 @@
 import { Link } from 'react-router'
+import { ArrowRight } from '@phosphor-icons/react'
 import { chapterPath, workChapters, workSection } from '@/content/home'
 import { chapterPicture } from './chapter-picture'
 import { ChapterFace } from './ChapterFace'
 import './work.css'
 
-/** Tiles are lazy, so Chrome reads their real width (`auto`); the fallback is the largest tile's share
- *  of the screen (measured: ~37vw from 1280 up, ~62vw at 1024, ~85vw on phones). */
-const TILE_SIZES = 'auto, (min-width: 1280px) 38vw, (min-width: 1024px) 62vw, 88vw'
+/** Tiles are lazy, so Chrome reads their real width (`auto`); the fallback is the largest tile's share of the screen. */
+const TILE_SIZES = 'auto, (min-width: 1280px) 44vw, (min-width: 1024px) 60vw, 92vw'
 
 /**
- * Work: a bento of the eight chapters. Every chapter on one screen as tiles of different sizes, the biggest
- * chapters largest (grid areas in work.css, keyed by chapter id); the tile is "A Clean frame". Nothing
- * holds: tiles rise in as they scroll into view. Every tile is a real link to /work/<chapter>, which opens that chapter's sheet over Home.
+ * Work: the five projects as job cards. The two products lead large; the business, the store and the
+ * event system follow. Each card shows a real capture (or the tools, when there is no public page), the
+ * project's kind, a one-line summary and its workflow as a chip row, so the work reads without opening
+ * anything. Every card is a real link to /work/<project>, which opens its case-study sheet over Home.
  */
 export function WorkSection() {
   return (
@@ -21,6 +22,7 @@ export function WorkSection() {
         <h2 id="work-title" className="wk-title">
           <span className="wk-title__thin">{workSection.titleThin}</span> <span className="wk-title__bold">{workSection.titleBold}</span>
         </h2>
+        <p className="wk-lede">{workSection.lede}</p>
       </header>
       <ul className="wb__grid">
         {workChapters.map((chapter) => {
@@ -40,12 +42,28 @@ export function WorkSection() {
                       loading="lazy"
                       decoding="async"
                     />
-                  ) : <ChapterFace chapter={chapter} foot={false} />}
+                  ) : (
+                    <ChapterFace chapter={chapter} foot={false} />
+                  )}
+                  <span className="wb__scope">{pic ? 'Live page' : 'No public demo'}</span>
                 </span>
                 <span className="wb__cap">
-                  <b>{chapter.title}</b>
-                  <span className="wk-count">
-                    {chapter.count} {chapter.unit}
+                  <span className="wb__meta">
+                    <span className="wb__code">{chapter.code}</span>
+                    <span>{chapter.kind}</span>
+                  </span>
+                  <b className="wb__title">{chapter.title}</b>
+                  <span className="wb__line">{chapter.line}</span>
+                  <span className="wb__flow">
+                    {chapter.caseStudy.flow.map((step) => (
+                      <span key={step.label} data-by={step.by}>
+                        {step.label}
+                      </span>
+                    ))}
+                  </span>
+                  <span className="wb__open">
+                    Open case study
+                    <ArrowRight size={14} weight="bold" aria-hidden />
                   </span>
                 </span>
               </Link>

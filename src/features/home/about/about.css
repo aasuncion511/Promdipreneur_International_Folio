@@ -1,15 +1,11 @@
 /*
- * Home About, "The floor". The cutout stands on a hairline
- * floor; the lead overlaps its space. Below 761px of column the picture drops under the lead.
+ * Experience: four perspective cards, then a selected timeline set like a ledger (period | role).
  */
 
 .ab {
   --gutter: clamp(16px, 3.5vw, 56px);
   container-type: inline-size;
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: clamp(72px, 12vh, 128px) var(--gutter);
-  /* The phone top bar is sticky, so a jump to #about lands below it. */
+  padding: clamp(64px, 10vh, 112px) var(--gutter);
   scroll-margin-top: 56px;
 }
 @media (min-width: 1024px) {
@@ -18,303 +14,200 @@
   }
 }
 
+.ab__head {
+  max-width: 820px;
+}
 .ab__lede {
-  margin: 18px 0 0;
-  max-width: 52ch;
+  max-width: 62ch;
+  margin: 22px 0 0;
   color: var(--ink-2);
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-/* ---------- The floor ---------- */
-
-.ab__stage {
-  position: relative;
-  min-height: clamp(400px, 47cqi, 560px);
-  margin: clamp(40px, 7vh, 64px) calc(var(--gutter) * -1) 0;
-  padding-inline: var(--gutter);
-}
-/* The floor: a hairline edge to edge, drawn out from under the picture once it has landed. */
-.ab__stage::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 1px;
-  background: var(--line-strong);
-  transform-origin: right;
+  font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.2rem);
+  line-height: 1.55;
 }
 .ab__lead {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  max-width: 16ch;
-  font-size: clamp(28px, 3.7cqi, 48px);
-  font-weight: 650;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  margin: 14px 0 0;
+  color: var(--ink);
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+  font-weight: 620;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
 }
-.ab__lead > span {
+
+.ab__sub {
+  margin: clamp(40px, 6vh, 64px) 0 16px;
   color: var(--ink-3);
-  font-weight: 300;
-}
-.ab__pic {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(58%, 680px);
-  aspect-ratio: 1200 / 889;
-}
-.ab__pic > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: 50% 100%;
-  /* Dark only: a faint rim so the navy monitor and dark hair keep an edge on Onyx. Never a box. */
-  filter: var(--cutout-rim);
-}
-
-/* ---------- Below the floor ---------- */
-
-.ab__below {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(28px, 5cqi, 72px);
-  align-items: start;
-  margin-top: clamp(32px, 5vh, 48px);
-}
-.ab__note {
-  margin: 0;
-  max-width: 54ch;
-  color: var(--ink-2);
-  font-size: 15px;
-  line-height: 1.65;
-}
-.ab__note > strong {
-  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 600;
-}
-.ab__note > a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--line-strong);
-  text-underline-offset: 3px;
-  transition: text-decoration-color var(--dur-fast) var(--ease-spring);
-}
-.ab__note > a:hover {
-  text-decoration-color: var(--ink);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.ab__caps {
+.ab__persp {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--line);
 }
-.ab__cap {
+.ab__card {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  min-height: 60px;
-  border-bottom: 1px solid var(--line);
+  align-content: start;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
-.ab__cap-title {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.ab__cap-i {
-  color: var(--ink-3);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-}
-
-/* Tool logos as raised paper keys (the Work card material), overlapping like a stack of tiles. */
-.ab__keys {
-  display: flex;
-}
-.ab__key {
+.ab__icon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  flex: none;
-  border-radius: 24%;
-  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
-  box-shadow:
-    var(--paper-tile-shadow),
-    inset 0 1.5px 0 var(--paper-light),
-    inset 0 -2px 0 var(--paper-bevel),
-    inset 0 0 0 1px var(--paper-line);
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
 }
-.ab__key + .ab__key {
-  margin-left: -7px;
+.ab__card h4 {
+  margin: 4px 0 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
 }
-.ab__key > img {
-  width: 58%;
-  height: 58%;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 0 var(--paper-light));
+.ab__card p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.55;
 }
 
-/* ---------- Credentials ---------- */
-
-.ab__creds {
+.ab__time-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px 44px;
-  margin-top: 32px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
 }
-.ab__cred {
-  display: flex;
+.ab__legend {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  min-width: 0;
-  min-height: 44px;
-  color: inherit;
-  text-decoration: none;
+  gap: 8px;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 13px;
 }
-.ab__cred-mark {
+.ab__us {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--earth);
+  border-radius: 5px;
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  vertical-align: 1px;
+}
+.ab__roles {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+  list-style: none;
+}
+.ab__role {
   display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  flex: none;
-  border-radius: 10px;
-  background: var(--surface-2);
-  color: var(--ink-2);
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
 }
-.ab__cred-mark > img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-.ab__cred-copy {
-  display: grid;
-  gap: 3px;
-  min-width: 0;
-}
-.ab__cred-copy > b {
-  font-size: 14.5px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.ab__cred-copy > small {
+.ab__period {
   color: var(--ink-3);
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  padding-top: 2px;
 }
-.ab__cred-go {
-  margin-left: auto;
+.ab__what {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 2px 24px;
+}
+.ab__what > b {
+  font-size: 15.5px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+}
+.ab__org {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  grid-column: 1;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.ab__detail {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ab__earlier {
+  max-width: 90ch;
+  margin: 18px 0 0;
   color: var(--ink-3);
-  transition:
-    color var(--dur-fast) var(--ease-spring),
-    transform var(--dur-slow) var(--ease-spring);
+  font-size: 13.5px;
+  line-height: 1.6;
 }
-a.ab__cred:hover .ab__cred-go {
-  color: var(--ink);
-  transform: translate(2px, -2px);
-}
-a.ab__cred:focus-visible,
-.ab__note > a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+.ab__based {
+  margin: 8px 0 0;
+  color: var(--ink-3);
+  font-size: 13.5px;
 }
 
-/* ---------- Narrow columns: the picture drops under the lead ---------- */
-
-@container (max-width: 760px) {
-  .ab__stage {
-    min-height: 0;
+@container (max-width: 900px) {
+  .ab__persp {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .ab__lead {
-    max-width: 20ch;
+  .ab__what {
+    grid-template-columns: 1fr;
   }
-  .ab__pic {
-    position: relative;
-    right: auto;
-    width: 100%;
-    margin-top: 20px;
-  }
-  .ab__below {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .ab__cap {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    gap: 10px 12px;
-    padding: 14px 0;
-  }
-  .ab__keys {
-    grid-row: 2;
+  .ab__detail {
     grid-column: 1;
+    grid-row: auto;
+    margin-top: 4px;
   }
-  .ab__cap-i {
-    grid-row: 1;
-    grid-column: 2;
+}
+@container (max-width: 560px) {
+  .ab__persp {
+    grid-template-columns: 1fr;
+  }
+  .ab__role {
+    grid-template-columns: 1fr;
   }
 }
 
-/* ---------- Scroll-in: the picture rises onto the floor, the floor draws out ---------- */
-
+/* Cards rise in as they scroll into view (compositor only). */
 @keyframes ab-rise {
   from {
     opacity: 0;
-    transform: translateY(48px);
-  }
-}
-@keyframes ab-floor {
-  from {
-    transform: scaleX(0);
+    transform: translateY(24px);
   }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .ab__pic {
+    .ab__card,
+    .ab__role {
       animation: ab-rise linear both;
     }
-    /* Lands the moment the whole picture is on screen. */
-    .ab .ab__pic {
+    .ab .ab__card,
+    .ab .ab__role {
       animation-timeline: view();
-      animation-range: entry 10% entry 100%;
+      animation-range: entry 0% entry 50%;
     }
-    .ab__stage::after {
-      animation: ab-floor linear both;
-    }
-    /* The floor is the stage's bottom edge: it can only be seen from contain 0%, so it draws after that. */
-    .ab .ab__stage::after {
-      animation-timeline: --ab-stage;
-      animation-range: contain 0% contain 35%;
-    }
-    .ab .ab__stage {
-      view-timeline-name: --ab-stage;
-    }
-    /* Parallax: the lead is the near layer and floats up over the picture, which stays planted on
-       its floor. Wide columns only: below 761px the picture sits under the lead with 20px between. */
-    .ab__lead {
-      animation: ab-lead-drift linear both;
-    }
-    .ab .ab__stage .ab__lead {
-      animation-timeline: --ab-stage;
-      animation-range: cover 0% cover 100%;
-    }
-  }
-}
-@keyframes ab-lead-drift {
-  from {
-    translate: 0 32px;
-  }
-  to {
-    translate: 0 -32px;
-  }
-}
-@container (max-width: 760px) {
-  .ab .ab__stage .ab__lead {
-    animation-name: none;
   }
 }

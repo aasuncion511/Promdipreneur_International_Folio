@@ -3,11 +3,11 @@ import { readStorage, STORAGE_KEYS, writeStorage } from './storage'
 export type Theme = 'light' | 'dark'
 
 /** Browser chrome color per theme. Keep in sync with --bg in tokens.css. */
-const THEME_COLOR: Record<Theme, string> = { light: '#F0F8FF', dark: '#0A0A0A' }
+const THEME_COLOR: Record<Theme, string> = { light: '#F7F7F3', dark: '#0B1610' }
 
-/** The theme index.html already applied before paint: dark unless the visitor picked light. */
+/** The theme index.html already applied before paint: light (cream) unless the visitor picked dark. */
 export function getInitialTheme(): Theme {
-  return readStorage(STORAGE_KEYS.theme) === 'light' ? 'light' : 'dark'
+  return readStorage(STORAGE_KEYS.theme) === 'dark' ? 'dark' : 'light'
 }
 
 function paint(theme: Theme): void {

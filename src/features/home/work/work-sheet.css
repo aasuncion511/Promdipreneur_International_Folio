@@ -91,12 +91,20 @@
   text-wrap: balance;
 }
 
-.sh__intro {
-  max-width: 62ch;
-  margin: 0 0 32px;
-  color: var(--ink-2);
-  font-size: 15px;
-  line-height: 1.55;
+.sh__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sh__code {
+  color: var(--signal-ink);
+  font-weight: 700;
 }
 
 .sh__close {
@@ -132,145 +140,411 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Shared picture frame. */
-.sh__shot {
-  display: block;
-  aspect-ratio: 16 / 10;
-  overflow: clip;
-  border-radius: var(--radius-lg);
-  background: var(--surface-2);
-  box-shadow: 0 0 0 1px var(--line);
-}
-.sh__shot img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform var(--dur-slow) var(--ease-spring);
-}
-.sh__shot--contain img {
-  padding: 6%;
-  object-fit: contain;
-  object-position: center;
-}
-a:hover > .sh__shot img,
-a.sh__shot:hover img {
-  transform: scale(1.025);
-}
+/* ---------- The case study ---------- */
 
-/* Picture-led grid, one per group when the chapter has groups. */
-.sh__sets {
-  display: grid;
-  gap: 56px;
-}
-.sh__set > .sh__group-title {
-  margin-bottom: 20px;
-}
-
-.sh__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: 36px 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sh__link {
-  display: grid;
-  gap: 16px;
-}
-
-.sh__cap {
-  display: grid;
-  gap: 6px;
-}
-
-.sh__name {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin: 0;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-}
-.sh__name svg {
-  flex: none;
-  color: var(--ink-3);
-  transition: transform var(--dur-fast) var(--ease-spring), color 160ms ease;
-}
-a:hover .sh__name svg {
-  color: var(--accent-ink);
-  transform: translate(2px, -2px);
-}
-
-.sh__sum {
-  margin: 0;
-  color: var(--ink-2);
-  font-size: 14.5px;
-  line-height: 1.55;
-}
-
-.sh__status {
-  margin-left: 12px;
-  color: var(--ink-2);
-}
-
-/* Grouped rows (no pictures). */
-.sh__groups {
+.cs {
   display: grid;
   gap: 40px;
 }
-.sh__group-title {
-  margin: 0 0 4px;
-  color: var(--ink-3);
+.cs__intro {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--ink-2);
+  font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.2rem);
+  line-height: 1.55;
+}
+.cs__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -24px 0 0;
+}
+.cs__stack > span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+
+/* Section labels: a numbered form field, like the kit's own documents. */
+.cs__label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.3em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.sh__group > ul {
+.cs__label > span {
+  color: var(--earth);
+}
+
+/* Problem, built, role: one card with three cells, like a job card. */
+.cs__card {
   display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.cs__cell {
+  padding: 22px 22px 24px;
+}
+.cs__cell + .cs__cell {
+  border-top: 1px solid var(--line);
+}
+.cs__cell p,
+.cs__list,
+.cs__role {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.cs__cell--problem p {
+  color: var(--ink);
+  font-size: 16.5px;
+  line-height: 1.55;
+}
+.cs__list {
+  display: grid;
+  gap: 10px;
+  padding-left: 18px;
+}
+.cs__list > li::marker {
+  color: var(--signal);
+}
+.cs__role {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+.cs__role > li {
+  position: relative;
+  padding-left: 22px;
+}
+.cs__role > li::before {
+  content: '';
+  position: absolute;
+  top: 0.55em;
+  left: 2px;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--signal-ink);
+  border-bottom: 2px solid var(--signal-ink);
+  transform: rotate(-45deg);
+}
+
+/* The workflow strip: numbered stations joined by a line; system steps carry the signal green. */
+.cs__flow {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+.cs__flow > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-areas:
+    'n by'
+    'n label'
+    'n note';
+  column-gap: 14px;
+  padding: 0 0 22px;
+}
+.cs__flow > li::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  bottom: 0;
+  left: 19px;
+  width: 2px;
+  background: var(--line-strong);
+}
+.cs__flow > li:last-child::before {
+  display: none;
+}
+.cs__flow-n {
+  grid-area: n;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+.cs__flow > li[data-by='system'] .cs__flow-n {
+  border-color: var(--signal);
+  background: var(--signal-soft);
+  color: var(--ink);
+}
+.cs__flow-by {
+  grid-area: by;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cs__flow > li[data-by='system'] .cs__flow-by {
+  color: var(--signal-ink);
+}
+.cs__flow > li > b {
+  grid-area: label;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.cs__flow-note {
+  grid-area: note;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.cs__matters p {
+  max-width: 68ch;
+  margin: 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--earth);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--earth-soft);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cs__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+
+.cs__evidence {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.sh__row {
+.cs__frame {
+  display: block;
+  max-height: 560px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  box-shadow: 0 0 0 1px var(--line-strong), var(--shadow-md);
+}
+.cs__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+:root[data-theme='dark'] .cs__frame img {
+  filter: brightness(0.92);
+}
+.cs__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 12px 0 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.cs__scope {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cs__scope[data-scope='Public demo, sample data'] {
+  background: var(--signal-soft);
+}
+
+.cs__notes {
+  display: grid;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding: 18px 20px 18px 36px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--ink-3);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* ---------- P-05 illustration (synthetic data) ---------- */
+
+.qr {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--bg);
+}
+.qr__label {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--earth-soft);
+  color: var(--earth);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.qr__steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.qr__panel {
+  position: relative;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--paper-tile-shadow);
+}
+/* The connector between panels, with a packet riding it. */
+.qr__panel + .qr__panel::before {
+  content: '';
+  position: absolute;
+  top: -28px;
+  left: 32px;
+  width: 2px;
+  height: 28px;
+  background: var(--signal);
+}
+.qr__kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  color: var(--paper-ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.qr__record {
   display: grid;
   gap: 6px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-/* Single build with a gallery. */
-.sh__single {
-  display: grid;
-  gap: 28px;
-}
-.sh__shot--lead {
-  aspect-ratio: 16 / 10;
-}
-.sh__live {
-  justify-self: start;
-}
-.sh__gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
-  gap: 16px;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  font-size: 13.5px;
 }
-/* App screens read from the top left (lists, tables): crop from there, never cut the left edge. */
-.sh__gallery .sh__shot img {
-  object-position: left top;
+.qr__record > div {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--paper-line);
+}
+.qr__record dt {
+  color: var(--paper-ink-3);
+}
+.qr__record dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+.qr__pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(24 185 87 / 0.16);
+  color: #0b5c2b;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+}
+.qr__mail {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.qr__subject {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+.qr__body {
+  margin: 0;
+  color: var(--paper-ink-3);
+  font-size: 13px;
+}
+.qr__code {
+  width: 112px;
+  height: 112px;
+  margin: 6px 0 2px;
+  color: #0f2418;
+}
+.qr__id,
+.qr__row {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.qr__scan {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 10px 0 4px;
+  color: #0b7a37;
+  text-align: center;
+}
+.qr__ok {
+  margin: 0;
+  color: var(--paper-ink);
+  font-size: 18px;
+  font-weight: 700;
+}
+.qr__row {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgb(24 185 87 / 0.12);
+  color: var(--paper-ink);
 }
 
-/* Next chapter. */
 .sh__next {
   margin-top: 56px;
   border-top: 1px solid var(--line);
@@ -314,32 +588,75 @@ a:hover .sh__name svg {
     gap: 40px;
     padding: 4px 48px 28px;
   }
-  .sh__intro {
-    font-size: 16px;
-  }
   .sh__body {
     padding: 8px 48px 64px;
   }
-  .sh__grid {
-    gap: 44px 28px;
+}
+
+@media (min-width: 760px) {
+  .cs__card {
+    grid-template-columns: 1.1fr 1fr 0.9fr;
   }
-  /* The first build leads: a wide picture with its caption beside it. */
-  .sh__item--lead {
+  .cs__cell + .cs__cell {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+  /* The workflow runs left to right: stations on one line, joined. */
+  .cs__flow {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .cs__flow > li {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'n' 'by' 'label' 'note';
+    row-gap: 6px;
+    padding: 0;
+  }
+  .cs__flow > li::before {
+    top: 17px;
+    bottom: auto;
+    left: 48px;
+    right: -12px;
+    width: auto;
+    height: 2px;
+  }
+  .cs__flow-n {
+    margin-bottom: 6px;
+  }
+  .cs__evidence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 28px;
+  }
+  .cs__shot--lead {
     grid-column: 1 / -1;
   }
-  .sh__item--lead > .sh__link {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    align-items: end;
-    gap: 32px;
+  .cs__shot:not(.cs__shot--lead) .cs__frame {
+    max-height: 340px;
   }
-  .sh__item--lead .sh__name {
-    font-size: 22px;
+  .qr__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
   }
-  .sh__item--lead .sh__sum {
-    font-size: 15.5px;
+  .qr__panel + .qr__panel::before {
+    top: 50%;
+    left: -28px;
+    width: 28px;
+    height: 2px;
   }
-  .sh__groups {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 48px 40px;
+}
+
+/* A packet runs the connectors (compositor only; off under reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  .cs__flow > li[data-by='system'] .cs__flow-n {
+    animation: cs-pulse 2.4s ease-in-out infinite;
   }
+  .cs__flow > li:nth-child(2) .cs__flow-n { animation-delay: 0.3s; }
+  .cs__flow > li:nth-child(3) .cs__flow-n { animation-delay: 0.6s; }
+  .cs__flow > li:nth-child(4) .cs__flow-n { animation-delay: 0.9s; }
+  .cs__flow > li:nth-child(5) .cs__flow-n { animation-delay: 1.2s; }
+}
+@keyframes cs-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  40% { box-shadow: 0 0 0 5px var(--signal-soft); }
 }

@@ -45,7 +45,15 @@
   letter-spacing: 0.12em;
 }
 
-/* ---------- The bento ---------- */
+.wk-lede {
+  max-width: 60ch;
+  margin: 18px 0 0;
+  color: var(--ink-2);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+  line-height: 1.55;
+}
+
+/* ---------- The job cards ---------- */
 
 .wb {
   padding: clamp(64px, 10vh, 112px) var(--gutter);
@@ -53,38 +61,27 @@
 .wb__head {
   margin-bottom: clamp(28px, 5vh, 48px);
 }
+/* Two products lead on the first row; the business, the store and the event system share the second. */
 .wb__grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(4, clamp(150px, 14.5cqi, 210px));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-areas:
-    'web web web web web web app app app tic tic tic'
-    'web web web web web web app app app tic tic tic'
-    'aut aut aut aut fw  fw  app app app bp  bp  bp'
-    'aut aut aut aut ai  ai  bot bot bot bp  bp  bp';
-  gap: 12px;
+    'p1 p1 p1 p2 p2 p2'
+    'p3 p3 p4 p4 p5 p5';
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.wb__cell[data-area='websites'] { grid-area: web; }
-.wb__cell[data-area='apps'] { grid-area: app; }
-.wb__cell[data-area='featured'] { grid-area: tic; }
-.wb__cell[data-area='screens'] { grid-area: aut; }
-.wb__cell[data-area='case-studies'] { grid-area: fw; }
-.wb__cell[data-area='process'] { grid-area: bp; }
-.wb__cell[data-area='side-projects'] { grid-area: ai; }
-.wb__cell[data-area='experiments'] { grid-area: bot; }
+.wb__cell[data-area='cleaning-kits'] { grid-area: p1; }
+.wb__cell[data-area='payroll'] { grid-area: p2; }
+.wb__cell[data-area='digital-store'] { grid-area: p3; }
+.wb__cell[data-area='fresh-start'] { grid-area: p4; }
+.wb__cell[data-area='qr-checkin'] { grid-area: p5; }
 
 .wb__cell {
   min-width: 0;
-  min-height: 0;
 }
-/*
- * The tile = "A Clean frame": a soft hairline edge,
- * the picture inset evenly with matching corners, name and count on one line in plain text, pictures
- * softened on dark.
- */
 .wb__tile {
   position: relative;
   display: flex;
@@ -115,12 +112,15 @@
 }
 .wb__media {
   position: relative;
-  flex: 1;
-  min-height: 0;
+  flex: none;
+  aspect-ratio: 16 / 10;
   margin: 10px 10px 0;
   overflow: clip;
   border-radius: calc(var(--radius-xl) - 10px);
   background: var(--surface-2);
+}
+.wb__cell:nth-child(n + 3) .wb__media {
+  aspect-ratio: 4 / 3;
 }
 /* A hairline on the picture's own edge, so a white capture never melts into a white tile. */
 .wb__media::after {
@@ -139,60 +139,133 @@
   object-position: top left;
   transition: transform var(--dur-slow) var(--ease-spring);
 }
-/* White captures on Onyx are softened so they do not glare. */
 :root[data-theme='dark'] .wb__media > img {
-  filter: brightness(0.86);
+  filter: brightness(0.9);
+}
+/* What the picture is: a live page capture, or no public page at all. */
+.wb__scope {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--media-scrim);
+  color: var(--on-media);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .wb__cap {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  flex: 1;
+  padding: 16px 18px 18px;
+}
+.wb__meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 2px 12px;
-  padding: 12px 16px 14px;
+  gap: 4px 12px;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
-.wb__cap .wk-count {
-  font-family: inherit;
-  font-size: 13px;
-  letter-spacing: 0;
+.wb__code {
+  color: var(--signal-ink);
+  font-weight: 700;
 }
-/* Names wrap (never clip): a narrow tile gives the picture's height to a second line. */
-.wb__cap > b {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+.wb__title {
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-wrap: balance;
+}
+.wb__line {
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+/* The workflow as chips: system steps carry the signal green, people steps stay neutral. */
+.wb__flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  margin-top: 4px;
+}
+.wb__flow > span {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.wb__flow > span[data-by='system'] {
+  border-color: transparent;
+  background: var(--signal-soft);
+  color: var(--ink);
+}
+.wb__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.wb__open svg {
+  transition: transform var(--dur-base) var(--ease-spring);
 }
 @media (hover: hover) and (pointer: fine) {
   .wb__tile:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-float);
   }
   .wb__tile:hover .wb__media > img {
-    transform: scale(1.04);
+    transform: scale(1.03);
+  }
+  .wb__tile:hover .wb__open svg {
+    transform: translateX(4px);
   }
 }
-@container (max-width: 700px) {
+@container (max-width: 900px) {
   .wb__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 220px 180px 180px 200px 170px 160px;
     grid-template-areas:
-      'web web'
-      'app tic'
-      'app bp'
-      'aut aut'
-      'fw  ai'
-      'bot bot';
-    gap: 10px;
+      'p1 p1'
+      'p2 p2'
+      'p3 p4'
+      'p5 p5';
+  }
+  .wb__cell:nth-child(n + 3) .wb__media {
+    aspect-ratio: 16 / 10;
+  }
+}
+@container (max-width: 560px) {
+  .wb__grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'p1' 'p2' 'p3' 'p4' 'p5';
+    gap: 12px;
   }
 }
 
-/* Tiles rise in as they scroll into view (CSS view timeline, compositor only; still under reduced motion). */
+/* Cards rise in as they scroll into view (CSS view timeline, compositor only). */
 @keyframes wb-rise {
   from {
     opacity: 0;
-    transform: translateY(40px) scale(0.97);
+    transform: translateY(32px) scale(0.98);
   }
 }
 @supports (animation-timeline: view()) {
@@ -202,35 +275,7 @@
     }
     .wb .wb__cell {
       animation-timeline: view();
-      animation-range: entry 0% entry 70%;
-    }
-  }
-}
-
-/*
- * Parallax: each capture is the deeper layer and drifts inside its frame while the tile crosses the
- * screen. The picture is 110% tall with 5%
- * spare above and below; the drift is +-4% of its height, so no edge ever shows. `translate`, not
- * `transform`, so the hover zoom composes with it. Compositor only; off under reduced motion.
- */
-@keyframes wb-drift {
-  from {
-    translate: 0 -4%;
-  }
-  to {
-    translate: 0 4%;
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .wb__media > img {
-      top: -5%;
-      height: 110%;
-      animation: wb-drift linear both;
-    }
-    .wb .wb__media > img {
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
+      animation-range: entry 0% entry 60%;
     }
   }
 }

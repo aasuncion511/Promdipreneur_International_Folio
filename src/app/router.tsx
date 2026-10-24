@@ -1,10 +1,9 @@
 import type { ComponentType } from 'react'
-import { createBrowserRouter, Navigate, type RouteObject } from 'react-router'
+import { createBrowserRouter, createMemoryRouter, Navigate, type RouteObject } from 'react-router'
+import { findChapter } from '@/content/home'
 import { ContactPage } from '@/features/contact/ContactPage'
 import { HomePage } from '@/features/home/HomePage'
-import { ShowcasePage } from '@/features/showcase/ShowcasePage'
 import { LegalPage } from '@/features/legal/LegalPage'
-import { ProofPage } from '@/features/proof/ProofPage'
 import { AppShell } from './AppShell'
 import { RouteStage } from './RouteStage'
 import { notFoundTitle, pages, type PageRoute } from './routes'
@@ -12,8 +11,6 @@ import { notFoundTitle, pages, type PageRoute } from './routes'
 /** Built pages by registry id. Any page not listed here still renders the bare RouteStage. */
 const PAGE_COMPONENTS: Partial<Record<string, ComponentType<{ page: PageRoute }>>> = {
   home: HomePage,
-  'showcase': ShowcasePage,
-  proof: ProofPage,
   contact: ContactPage,
   privacy: LegalPage,
   terms: LegalPage,
@@ -38,11 +35,24 @@ function routeFor(page: PageRoute): RouteObject {
   return { path: page.path.slice(1), element: elementFor(page) }
 }
 
-/** Every route comes from the registry in routes.ts. */
-export const router = createBrowserRouter([
+const routes: RouteObject[] = [
   {
     path: '/',
     element: <AppShell />,
     children: [...pages.map(routeFor), { path: '*', element: <RouteStage title={notFoundTitle} label="Page not found" /> }],
   },
-])
+]
+
+/**
+ * The review build (VITE_REVIEW_ARTIFACT=1, `npm run build:review`) runs inside a hosted viewer whose
+ * address bar never follows the page, so routing stays in memory. A bare `#token` in the link opens a
+ * project (`#payroll`) or a Home section (`#contact`); everything else behaves as on the real site.
+ */
+function reviewEntry(): string {
+  const token = window.location.hash.slice(1)
+  if (findChapter(token)) return `/work/${token}`
+  return token ? `/#${token}` : '/'
+}
+
+/** Every route comes from the registry in routes.ts. */
+export const router = import.meta.env.VITE_REVIEW_ARTIFACT === '1' ? createMemoryRouter(routes, { initialEntries: [reviewEntry()] }) : createBrowserRouter(routes)

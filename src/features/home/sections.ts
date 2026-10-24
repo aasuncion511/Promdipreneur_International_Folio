@@ -5,8 +5,7 @@ import { AutomationSection } from './automation/AutomationSection'
 import { ManifestoSection } from './manifesto/ManifestoSection'
 import { ServicesSection } from './services/ServicesSection'
 import { WorkSection } from './work/WorkSection'
-import { ShowcaseSection } from '@/features/showcase/ShowcasePage'
-import { ProofSection } from '@/features/proof/ProofPage'
+import { ToolsSection } from './tools/ToolsSection'
 import { ContactSection } from '@/features/contact/ContactPage'
 
 /**
@@ -18,14 +17,13 @@ export type HomeSection = { id: string; Component: ComponentType }
 
 export const homeSectionList: HomeSection[] = [
   { id: 'hero', Component: HeroSection },
+  // Proof straight after the promise: the five projects, then the problem they solve and an example workflow.
+  { id: 'work', Component: WorkSection },
   { id: 'manifesto', Component: ManifestoSection },
   { id: 'automation', Component: AutomationSection },
-  { id: 'work', Component: WorkSection },
-  { id: 'services', Component: ServicesSection },
   { id: 'about', Component: AboutSection },
-  // Proof, Showcase and Contact keep their own pages too (/proof, /showcase, /contact); here they run as sections.
-  { id: 'proof', Component: ProofSection },
-  { id: 'showcase', Component: ShowcaseSection },
-  // Contact is the last section, after Showcase. /contact stays a page too.
+  { id: 'services', Component: ServicesSection },
+  { id: 'tools', Component: ToolsSection },
+  // Contact is the last section. /contact stays a page too.
   { id: 'contact', Component: ContactSection },
 ]
