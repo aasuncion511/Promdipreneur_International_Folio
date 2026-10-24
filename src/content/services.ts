@@ -43,7 +43,7 @@ export const services: Service[] = [
     summary: 'Scoped hours each month to improve what is running: new automations, reports, fixes and the next workflow on the list.',
     outcome: 'Steady improvement',
     bullets: ['A short monthly priority list', 'Changes tested before your team relies on them', 'Hours and meeting overlap agreed up front'],
-    tools: [tools.ghl, tools.sheets, tools.n8n],
+    tools: [tools.ghl, tools.sheets, tools.appsScript],
   },
   {
     id: 'agency',

@@ -5,7 +5,8 @@ const mark = (name: string, file: string, mono?: true): ToolMark => ({ name, log
 
 /**
  * Every tool logo the site can show. Pages reference these, never a raw path. Marks come from the
- * official HighLevel asset, Simple Icons and SVG Logos (both CC0) and Lobe Icons (MIT), hosted locally. Showing a logo
+ * official HighLevel asset, Simple Icons and SVG Logos (both CC0) and
+ * Lobe Icons (MIT), hosted locally. Showing a logo
  * names a tool Allan works in; it does not imply a certification or partnership.
  * A black one-colour logo takes a third argument, `true`, so it is inverted on dark grounds.
  */
@@ -22,6 +23,8 @@ export const tools = {
   aiStudio: mark('Google AI Studio', 'google-ai-studio.svg', true),
   n8n: mark('n8n', 'n8n.svg'),
   codex: mark('Codex', 'codex.svg'),
+  claudeCode: mark('Claude Code', 'claude-code.svg'),
+  netlify: mark('Netlify', 'netlify.svg'),
   github: mark('GitHub', 'github.svg', true),
   slack: mark('Slack', 'slack.svg'),
   make: mark('Make', 'make.svg'),
@@ -53,10 +56,10 @@ export const toolGroups: ToolGroup[] = [
   {
     id: 'dev',
     title: 'Development and collaboration',
-    use: 'AI-assisted development, versioned code, integrations between the tools a client already has, and team updates where the work happens.',
-    tools: [tools.codex, tools.github, tools.n8n, tools.slack],
+    use: 'AI-assisted development, versioned code, deployment of small web apps, and team updates where the work happens.',
+    tools: [tools.claudeCode, tools.codex, tools.github, tools.netlify, tools.slack],
   },
 ]
 
 /** Shown under the groups as "Also familiar with", never as specialties. */
-export const alsoFamiliar: ToolMark[] = [tools.make, tools.zapier]
+export const alsoFamiliar: ToolMark[] = [tools.n8n, tools.make, tools.zapier]

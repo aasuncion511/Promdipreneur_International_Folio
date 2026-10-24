@@ -6,7 +6,7 @@ import { chapterPath, workChapters } from '@/content/home'
 import type { WorkChapter } from '@/content/schema'
 import { gsap, MOTION_CONDITIONS, spring } from '@/lib/motion/gsap'
 import { chapterJsonLd, chapterTitle } from '@/lib/seo'
-import { QrCheckinIllustration } from './QrCheckinIllustration'
+import { QrCheckinDemo } from './QrCheckinDemo'
 import { useSheet } from './use-sheet'
 import './work-sheet.css'
 
@@ -210,7 +210,7 @@ function CaseStudyBody({ chapter }: { chapter: WorkChapter }) {
             ))}
           </p>
         ) : null}
-        {cs.illustration === 'qr-checkin' ? <QrCheckinIllustration /> : null}
+        {cs.illustration === 'qr-checkin' ? <QrCheckinDemo /> : null}
         {cs.evidence.length ? (
           <ul className="cs__evidence">
             {cs.evidence.map((shot, i) => (
