@@ -238,6 +238,20 @@ function CaseStudyBody({ chapter }: { chapter: WorkChapter }) {
             ))}
           </ul>
         ) : null}
+        {cs.metrics?.length ? (
+          <div className="cs__metrics" data-reveal>
+            <dl>
+              {cs.metrics.map((m) => (
+                <div key={m.label}>
+                  <dt>{m.label}</dt>
+                  <dd>{m.value}</dd>
+                  {m.note ? <dd className="cs__metric-note">{m.note}</dd> : null}
+                </div>
+              ))}
+            </dl>
+            {cs.metricsSource ? <p className="cs__metric-src">{cs.metricsSource}</p> : null}
+          </div>
+        ) : null}
         <ul className="cs__notes" data-reveal>
           {cs.notes.map((note) => (
             <li key={note}>{note}</li>

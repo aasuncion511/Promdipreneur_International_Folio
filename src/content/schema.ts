@@ -129,6 +129,9 @@ export type CaseStudy = {
   links: LinkRef[]
   /** Scope notes: what the evidence does and does not show. Shown small, never hidden. */
   notes: string[]
+  /** Early figures with their source and limits. Shown only when they come from the platform itself. */
+  metrics?: { label: string; value: string; note?: string }[]
+  metricsSource?: string
   /** A drawn illustration instead of (or before) the captures. */
   illustration?: 'qr-checkin'
 }
