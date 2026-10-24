@@ -7,17 +7,9 @@ Prepared 24 October 2026 for Allan Asuncion. Built from the original V2 template
 - **Review URL (private Claude artifact):** https://claude.ai/artifact/9ZTX6NdM8kNnmQCWZu3dos. Only you can open it until you share it from its Share menu. Deep links work with a bare hash: `#payroll`, `#cleaning-kits`, `#digital-store`, `#fresh-start`, `#qr-checkin`, `#work`, `#about`, `#contact`.
 - **Locally:** `npm install`, then `npm run dev` (http://localhost:5190). Production: `npm run build && npm run preview` (http://localhost:5191).
 
-## Branch status: committed, not pushed
+## Branch status: pushed
 
-All work is committed on the local branch `claude/portfolio-v2-independent`. **It is not on GitHub**: the push was refused because the Claude GitHub App is not installed for `aasuncion511`. `main` was never touched. To publish the branch yourself, use the bundle delivered with this handoff:
-
-```bash
-git clone https://github.com/aasuncion511/portfoliov2-template && cd portfoliov2-template
-git fetch /path/to/claude-portfolio-v2-independent.bundle claude/portfolio-v2-independent:claude/portfolio-v2-independent
-git push -u origin claude/portfolio-v2-independent
-```
-
-Or install the Claude GitHub App (github.com/apps/claude) and ask me to push. A plain source zip is also provided.
+All work is on GitHub at https://github.com/aasuncion511/portfoliov2-template/tree/claude/portfolio-v2-independent. `main` was never touched.
 
 Nothing was changed on international.promdipreneur.com, its DNS, GHL funnels, the booking calendar, the store or any automation.
 
