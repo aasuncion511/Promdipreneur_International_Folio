@@ -4,6 +4,8 @@ Prepared 24 October 2026 for Allan Asuncion. Built from the original V2 template
 
 ## Where to see it
 
+- **Production (Netlify):** https://international-promdipreneur-website.netlify.app, built from `claude/portfolio-v2-independent` with `netlify.toml`. Every push to that branch redeploys.
+
 - **Review URL (private Claude artifact):** https://claude.ai/artifact/9ZTX6NdM8kNnmQCWZu3dos. Only you can open it until you share it from its Share menu. Deep links work with a bare hash: `#payroll`, `#cleaning-kits`, `#digital-store`, `#fresh-start`, `#qr-checkin`, `#work`, `#about`, `#contact`.
 - **Locally:** `npm install`, then `npm run dev` (http://localhost:5190). Production: `npm run build && npm run preview` (http://localhost:5191).
 
