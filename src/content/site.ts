@@ -27,7 +27,7 @@ export const site = {
     markLarge: asset('/images/brand/mark-512.webp'),
   },
   /** The live address, no trailing slash. Canonical URLs, the sitemap and the JSON-LD use it. */
-  url: 'https://international.promdipreneur.com',
+  url: 'https://portfolio.promdipreneur.com',
   role: 'Business Systems & Automation Implementer',
   email: 'allan@promdipreneur.com',
   emailSubject: 'Project inquiry from your portfolio',
@@ -58,7 +58,7 @@ export const socials: SocialLink[] = [
 /** Off-site links the pages point at. */
 export const externalLinks = {
   store: 'https://shop.promdipreneur.com/products-list',
-  company: 'https://international.promdipreneur.com',
+  company: 'https://portfolio.promdipreneur.com',
 } as const
 
 export function mailtoHref(): string {

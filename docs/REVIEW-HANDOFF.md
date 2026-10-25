@@ -4,7 +4,7 @@ Prepared 24 October 2026 for Allan Asuncion. Built from the original V2 template
 
 ## Where to see it
 
-- **Production (Netlify):** https://international-promdipreneur-website.netlify.app, built from `claude/portfolio-v2-independent` with `netlify.toml`. Every push to that branch redeploys.
+- **Live site:** https://portfolio.promdipreneur.com (Netlify project address: https://international-promdipreneur-website.netlify.app), built from `claude/portfolio-v2-independent` with `netlify.toml`. Every push to that branch redeploys.
 
 - **Review URL (private Claude artifact):** https://claude.ai/artifact/9ZTX6NdM8kNnmQCWZu3dos. Only you can open it until you share it from its Share menu. Deep links work with a bare hash: `#payroll`, `#cleaning-kits`, `#digital-store`, `#fresh-start`, `#qr-checkin`, `#work`, `#about`, `#contact`.
 - **Locally:** `npm install`, then `npm run dev` (http://localhost:5190). Production: `npm run build && npm run preview` (http://localhost:5191).
@@ -61,7 +61,7 @@ Promotional prices are not shown anywhere on the portfolio.
 - The review artifact was published but **I could not open claude.ai from this environment to view it live**. I tested the exact review build locally inside a simulated host wrapper (home, `#payroll`, `#contact`, sheet open/close, fonts and images). If anything looks off on the live link, tell me and I'll fix it.
 - In the review artifact, links open in a new tab as normal, but `mailto:` links and the email-draft form may not open a mail app inside Claude's viewer. The email address is shown as text there. The real site behaves normally.
 - The `noindex` tag was removed for launch; search engines may index the site once it is live.
-- Canonical URLs, sitemap and Open Graph tags point at `international.promdipreneur.com` as the intended home. Change `site.url` if the domain differs.
+- Canonical URLs, sitemap and Open Graph tags point at `portfolio.promdipreneur.com`, the live home. `international.promdipreneur.com` forwards to it with a permanent (301) redirect in `netlify.toml`.
 - The main JS bundle is about 650 kB (206 kB gzipped). It was already large in the template; code-splitting is an optional later improvement.
 - The services card stack keeps V2's tall card format, which leaves some empty space on large screens.
 

@@ -9,6 +9,14 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# The old address forwards permanently to the new one, keeping any path (old shared links keep working).
+# Only takes effect once international.promdipreneur.com is added to this Netlify project as a domain alias.
+[[redirects]]
+  from = "https://international.promdipreneur.com/*"
+  to = "https://portfolio.promdipreneur.com/:splat"
+  status = 301
+  force = true
+
 # Real files win; any other path (/work/payroll, /contact, ...) is served the app, which routes it.
 [[redirects]]
   from = "/*"
