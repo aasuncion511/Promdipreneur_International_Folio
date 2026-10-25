@@ -38,8 +38,13 @@ export const site = {
   /** Your clock, shown live at the top of the sidebar. */
   timeZone: 'Asia/Manila',
   timePlace: 'in the Philippines',
-  /** No verified portrait yet: the sidebar shows a monogram. */
-  monogram: 'AA',
+  /** Allan's own portrait, square crops (sidebar, Experience, search data). */
+  avatar: {
+    small: asset('/images/profile/allan-224.webp'),
+    medium: asset('/images/profile/allan-448.webp'),
+    large: asset('/images/profile/allan-800.webp'),
+    alt: 'Allan Asuncion',
+  },
 } as const
 
 /** The existing international project-introduction calendar (GoHighLevel). Not the paid Philippine discovery offer. */

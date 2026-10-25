@@ -60,6 +60,7 @@ export function personJsonLd({ description, skills, sameAs }: PersonLd): string 
     {
       ...person(),
       description,
+      image: absoluteUrl(site.avatar.large),
       address: { '@type': 'PostalAddress', addressLocality: 'Cagayan de Oro', addressCountry: site.countryCode },
       worksFor: { '@type': 'Organization', name: site.brand, url: site.url },
       knowsAbout: skills,

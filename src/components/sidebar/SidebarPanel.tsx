@@ -54,10 +54,15 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
           onBlur={clearHover}
         >
           <span className="sb-pic">
-            {/* No verified portrait yet: a monogram, never a stand-in photo. */}
-            <span className="sb-pic__img sb-pic__mono" aria-hidden>
-              {site.monogram}
-            </span>
+            <img
+              className="sb-pic__img"
+              src={site.avatar.small}
+              srcSet={`${site.avatar.small} 224w, ${site.avatar.medium} 448w`}
+              sizes="112px"
+              alt=""
+              width={224}
+              height={224}
+            />
           </span>
           <span className="sb-profile__name sb-fade">{site.name}</span>
           <span className="sb-profile__role sb-fade">

@@ -169,22 +169,6 @@
   transform: scale(0.97);
 }
 
-/* The monogram stands in for a portrait: dark green disc, cream initials, the brand's brown ring on hover. */
-.sb-pic__mono {
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-size: calc(var(--pic) * 0.34);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  user-select: none;
-}
-:root[data-theme='dark'] .sb-pic__mono {
-  background: #004c25;
-  color: #f7f7f3;
-}
-
 .sb-profile__name {
   margin-top: 12px;
   font-size: 17px;

@@ -31,7 +31,7 @@ Nothing was changed on international.promdipreneur.com, its DNS, GHL funnels, th
 | Toolbox grouped by job (CRM and journeys; operational tools incl. Google Workspace; thinking and prototyping; development and collaboration: Claude Code, Codex, GitHub, Netlify, Slack), logos on light keys with names visible, n8n, Make and Zapier as "Also familiar with", plus a no-partnership note | Recognisable, secondary to the work, no proficiency bars |
 | Contact leads with a green **Book a project introduction** panel (existing GHL calendar, new tab), then email, FAQs and an email-draft form whose button says **Open email draft** and whose success state says the message **has not been sent yet** | One obvious next step; the form never claims to send anything |
 | Cream `#F7F7F3` default, dark green `#004C25` for ink and buttons, bright `#18B957` only for "live" or system steps, brown `#754000` for annotations and the tagline. Optional dark "Forest" theme | Clearly PromdiPreneur; no template blue remains |
-| Real logo cropped from the original asset. The sidebar uses the bulb mark plus the wordmark; on dark the wordmark sits on a cream plate rather than being recoloured. "AA" monogram instead of a photo | Logo used as drawn; no invented portrait |
+| Real logo cropped from the original asset. The sidebar uses the bulb mark plus the wordmark; on dark the wordmark sits on a cream plate rather than being recoloured. Allan's own portrait in the sidebar and Experience section | Logo used as drawn; a real face builds trust |
 | "From diskarte to systems." appears with an English gloss | Works for international visitors |
 
 Removed from V2: Proof (no verified testimonials or client accounts), Showcase (needs a product film), the certification tick and credential schema, the placeholder clients, demo sites, apps, videos and the template's tools.
@@ -72,7 +72,7 @@ Promotional prices are not shown anywhere on the portfolio.
 ## Still needed (none of these block review)
 
 1. Your resume file, `AllanAsuncionResume_CRM_AI_Automation_Specialist.docx`, if you want more detail. The timeline uses the brief's summary, with PromdiPreneur BASA Consultancy shown as "(Business Automation Solutions Architect)".
-2. A verified portrait (optional). The monogram is a deliberate stand-in.
+2. Portrait: added (sidebar, Experience section and search data).
 3. MinBizCon attendance totals, if you want them shown: the figures from the sheet's "Attendance Stats (All Days)" menu. Only totals, no names.
 4. Real customer feedback for Fresh Start or the products, if you want a proof section later.
 5. A CRM-connected inquiry form (later integration). Today: booking calendar + email.

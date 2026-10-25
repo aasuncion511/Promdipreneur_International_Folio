@@ -28,6 +28,7 @@ export function AboutSection() {
   return (
     <section id="about" className="ab" aria-labelledby="ab-title">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: personLd }} />
+      <div className="ab__intro">
       <header className="ab__head">
         <p className="wk-eyebrow">{s.eyebrow}</p>
         <h2 id="ab-title" className="wk-title">
@@ -36,6 +37,23 @@ export function AboutSection() {
         <p className="ab__lede">{s.lede}</p>
         <p className="ab__lead">{s.lead}</p>
       </header>
+      <figure className="ab__portrait">
+        <img
+          src={site.avatar.medium}
+          srcSet={`${site.avatar.medium} 448w, ${site.avatar.large} 800w`}
+          sizes="(min-width: 900px) 280px, 70vw"
+          alt={site.avatar.alt}
+          width={448}
+          height={448}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          <b>{site.name}</b>
+          <span>{site.location}</span>
+        </figcaption>
+      </figure>
+      </div>
 
       <h3 className="ab__sub">{s.perspectivesTitle}</h3>
       <ul className="ab__persp">
