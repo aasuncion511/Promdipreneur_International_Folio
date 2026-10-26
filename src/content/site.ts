@@ -40,9 +40,9 @@ export const site = {
   timePlace: 'in the Philippines',
   /** Allan's own portrait, square crops (sidebar, Experience, search data). */
   avatar: {
-    small: asset('/images/profile/allan-224.webp'),
-    medium: asset('/images/profile/allan-448.webp'),
-    large: asset('/images/profile/allan-800.webp'),
+    small: asset('/images/profile/allan-2017-224.webp'),
+    medium: asset('/images/profile/allan-2017-448.webp'),
+    large: asset('/images/profile/allan-2017-800.webp'),
     alt: 'Allan Asuncion',
   },
 } as const
