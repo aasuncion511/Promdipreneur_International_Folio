@@ -38,6 +38,8 @@ export const site = {
   /** Your clock, shown live at the top of the sidebar. */
   timeZone: 'Asia/Manila',
   timePlace: 'in the Philippines',
+  /** Shown in the footer. Change it when the site gets a real update. */
+  updated: 'October 2026',
   /** Allan's own portrait, square crops (sidebar, Experience, search data). */
   avatar: {
     small: asset('/images/profile/allan-2017-224.webp'),

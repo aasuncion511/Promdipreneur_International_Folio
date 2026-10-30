@@ -7,7 +7,7 @@ export function SiteFooter() {
   return (
     <footer className="site-foot">
       <p>
-        {site.name} · {site.brand}
+        © 2026 {site.name} · {site.brand} · Updated {site.updated}
       </p>
       <nav aria-label="Legal">
         <Link to="/privacy">Privacy Policy</Link>
