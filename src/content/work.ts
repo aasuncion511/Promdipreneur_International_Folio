@@ -27,6 +27,7 @@ const evidence = (id: string, height: number, caption: string, scope: EvidenceSc
 
 const LIVE: EvidenceScope = 'Live public page'
 const DEMO: EvidenceScope = 'Public demo, sample data'
+const SAMPLE: EvidenceScope = 'Working build, sample data'
 
 export const workPage = {
   eyebrow: 'Selected work',
@@ -336,6 +337,156 @@ export const workChapters: WorkChapter[] = [
         'What Meta flags, and what I am fixing next: every ad has a below-average quality ranking, one video was flagged as possibly click-baity, and one ad’s cost per result is rising. Next steps are static image ads, refreshed creatives and a retargeting ad set for site visitors.',
         'I will update this with sales results once there is enough data to report honestly, good or bad.',
         'Ad account details and budgets are kept private.',
+      ],
+    },
+  },
+  {
+    id: 'car-rental-os',
+    code: 'P-07',
+    kind: 'In progress · own SaaS product',
+    status: 'in-progress',
+    statusNote: 'In development · launch target December 2026',
+    title: 'Car Rental OS: Booking Website and Fleet Dashboard',
+    line: 'A multi-company booking website and operations dashboard for Philippine car rental operators. Working with sample data; no paying operator is live yet.',
+    count: 3,
+    unit: 'workspaces',
+    description:
+      'A multi-tenant SaaS I am building for Philippine car rental operators: a branded booking website, an owner and staff dashboard, and a platform admin across every client company.',
+    stack: ['Next.js', 'Prisma', 'Turso', 'PayMongo', 'Stripe', 'Resend', 'Render', 'Claude Code'],
+    marks: [tools.render, tools.turso, tools.claudeCode],
+    tile: shot('crm-admin-dashboard', 'Car Rental OS owner dashboard with sample figures', 900),
+    items: [],
+    caseStudy: {
+      problem:
+        'Small rental operators take bookings in Messenger and track which car is free in a notebook or a shared calendar. Two customers get promised the same unit, deposits get mixed up with income, and the owner cannot see how much cash actually came in this month.',
+      built: [
+        'A branded booking website for each operator, all on one platform: renters pick dates, see which units are free for those dates, and get a 25-minute hold that stops two people from claiming the same car at once.',
+        'Online reservation fees through the operator’s own PayMongo account (GCash, Maya, cards). Payment confirmations are verified per company, and the money never passes through me.',
+        'An owner and staff dashboard: bookings with a fleet calendar, units, customers, expenses, maintenance and team permissions. Refunds of rental payments are owner-only.',
+        'Money shown the way an owner thinks about it: cash actually collected, expenses, net profit, and security deposits held separately so they never count as revenue.',
+        'A platform admin for me as the operator of the service: every client company, its status, fleet size and bookings, with suspend and reactivate.',
+        'Each company’s data kept separate inside one shared app, and subscription billing for the operators through Stripe.',
+      ],
+      role: [
+        'Product design and business rules from rental operations',
+        'AI-assisted development with Claude Code and Codex',
+        'Data model, multi-company separation and payments design',
+        'Deployment on Render with a Turso database',
+        'Pricing, sales playbook and demo programme',
+      ],
+      flow: [
+        { label: 'Search dates', note: 'Branded booking site', by: 'person' },
+        { label: '25-minute hold', note: 'No double claims', by: 'system' },
+        { label: 'Reservation fee', note: 'Operator’s own PayMongo', by: 'system' },
+        { label: 'Booking recorded', note: 'Unit blocked on the calendar', by: 'system' },
+        { label: 'Release and return', note: 'Deposit held, then refunded', by: 'person' },
+      ],
+      matters:
+        'Rental operators lose money in the gaps between Messenger, the calendar and the cash box. Putting availability, payment and deposits in one record removes the double booking and the end-of-month guessing, and it lets a small team take bookings while the owner is away.',
+      evidence: [
+        evidence('crm-store-home', 900, 'Booking website: date search first, then the fleet', SAMPLE, 'Car Rental OS booking website for a sample rental company'),
+        evidence('crm-admin-dashboard', 900, 'Owner dashboard: cash collected, expenses, deposits on hand and fleet status', SAMPLE, 'Car Rental OS owner dashboard with sample figures'),
+        evidence('crm-admin-bookings', 900, 'Bookings: every reservation, with the fleet calendar and refund log', SAMPLE, 'Car Rental OS bookings list with sample renters'),
+        evidence('crm-platform-admin', 300, 'Platform admin: every client company on the service, with suspend and reactivate', SAMPLE, 'Car Rental OS platform admin listing one sample company'),
+      ],
+      links: [],
+      notes: [
+        'Screens are from the current code running with its fictional sample company, renters and figures. No real customer data is shown.',
+        'Not yet live with a paying operator. Before the first one: time-aware same-day pickup and return checks, payment-dated revenue reports, and an end-to-end subscription billing test.',
+        'Renter payments use each operator’s own PayMongo merchant account; this product never holds their customers’ money.',
+      ],
+    },
+  },
+  {
+    id: 'baltacars',
+    code: 'P-08',
+    kind: 'In progress · client proposal',
+    status: 'in-progress',
+    statusNote: 'Working concept · proposal stage',
+    title: 'BaltaCars: Dealership Showroom and Sales OS',
+    line: 'A showroom website and owner sales pipeline for a pre-owned car dealer in Cagayan de Oro, built as a working concept for the owner meeting.',
+    count: 3,
+    unit: 'screens',
+    description:
+      'A working concept for a Cagayan de Oro pre-owned car dealer: an online showroom, an owner sales pipeline from inquiry to release, and a content admin on Supabase.',
+    stack: ['JavaScript', 'Supabase', 'Netlify', 'Codex', 'Canva'],
+    marks: [tools.supabase, tools.netlify, tools.codex],
+    tile: shot('balta-store-home', 'BaltaCars showroom concept home page', 900),
+    items: [],
+    caseStudy: {
+      problem:
+        'A used-car dealer sells through Facebook posts and Messenger. Buyers cannot browse what is actually available, inquiries sit in chat threads, and the owner has no single view of who is in financing review, who reserved a unit, and what is ready for release.',
+      built: [
+        'An online showroom: units by category with search, a details view, and three clear next steps for a buyer: inquire, request a viewing, or ask about financing.',
+        'An owner sales pipeline: New Inquiry, Contacted, Financing Review, Reserved, For Release, Released, with a five-point release checklist before a unit can be handed over.',
+        'A content admin on Supabase: the owner adds or edits units with up to six photos, keeps them as drafts or publishes them, and changes the homepage hero without a developer.',
+        'Database rules so visitors only read published units, and only named admin accounts can change listings or upload photos.',
+        'A 13-page owner presentation and an implementation plan in phases: inventory and content, CRM and automations, then release controls and reports.',
+      ],
+      role: ['Discovery and sales-process mapping', 'Showroom and pipeline design', 'AI-assisted build with Codex', 'Supabase data and access rules', 'Owner presentation and proposal'],
+      flow: [
+        { label: 'Facebook or website', note: 'Buyer finds a unit', by: 'person' },
+        { label: 'Inquiry or viewing', note: 'Captured as a lead', by: 'system' },
+        { label: 'Financing review', note: 'Cash or financed', by: 'person' },
+        { label: 'Reserved', note: 'Unit assigned to buyer', by: 'system' },
+        { label: 'Release checklist', note: 'Five checks, then handover', by: 'person' },
+      ],
+      matters:
+        'For a dealer, the costly leaks are slow replies and units promised twice. A showroom that shows real availability, plus one pipeline the owner can read in a minute, turns Messenger chatter into a sales process the team can follow.',
+      evidence: [
+        evidence('balta-store-home', 900, 'Showroom home: the promise, then browse or ask about financing', SAMPLE, 'BaltaCars showroom concept home page'),
+        evidence('balta-store-units', 900, 'Featured units with category filters and search', SAMPLE, 'BaltaCars showroom concept unit grid with sample prices'),
+        evidence('balta-owner', 900, 'Owner demo: the six-stage pipeline and the selected inquiry', SAMPLE, 'BaltaCars owner sales pipeline with fictional buyers'),
+        evidence('balta-admin', 900, 'Content admin: listings, drafts and publishing', SAMPLE, 'BaltaCars content admin listing sample vehicles'),
+      ],
+      links: [],
+      notes: [
+        'A working concept prepared for the owner, not a commissioned production system. Units, prices and buyers are fictional.',
+        'Vehicle photos are representative Creative Commons photographs, not BaltaCars stock.',
+        'The sales pipeline runs in the browser for the demo; the shared CRM and messaging come in a later phase if the project goes ahead.',
+      ],
+    },
+  },
+  {
+    id: 'socri',
+    code: 'P-09',
+    kind: 'In progress · client website',
+    status: 'in-progress',
+    statusNote: 'Built · awaiting launch',
+    title: 'Socri Private Resort Website',
+    line: 'A one-page website for an exclusive-use private resort in Iponan, Cagayan de Oro: packages, a real photo tour, reviews and a date-check form.',
+    count: 3,
+    unit: 'packages',
+    description:
+      'A one-page website for Socri Private Resort in Cagayan de Oro: three event packages, an 18-photo tour, verified reviews and a booking request form. Built and ready to launch.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Google Maps'],
+    marks: [tools.netlify],
+    items: [],
+    caseStudy: {
+      problem:
+        'The resort was booked through Facebook and booking listings, with packages, rates and rules spread across posts and chat replies. Guests had to ask in chat before they could decide, and the place was hard to picture from scattered photos.',
+      built: [
+        'Three packages laid out side by side (Venue, Gathering with catering, Bliss with kids’ entertainment), each with full inclusions, catering sets and sample photos.',
+        'Day, night and full-use options with the capacity rules stated plainly: up to 80 event guests, 30 overnight.',
+        'An 18-photo resort tour with thumbnails, swipe, an optional slideshow and a full-screen viewer.',
+        'Reviews as short verified excerpts with the Google Maps rating at the time of research, a map, and Google Maps and Waze directions.',
+        'A booking request form that picks the package, date and use and shows the base rate, plus an FAQ built from the resort’s own answers.',
+      ],
+      role: ['Content structure and copy', 'Design and front-end build', 'Photo selection and review verification', 'Netlify deployment package'],
+      flow: [
+        { label: 'Find the resort', note: 'Facebook, Maps, search', by: 'person' },
+        { label: 'Compare packages', note: 'Inclusions and rates', by: 'person' },
+        { label: 'Photo tour', note: '18 real photos', by: 'system' },
+        { label: 'Pick date and use', note: 'Base rate shown', by: 'system' },
+        { label: 'Booking request', note: 'Resort confirms', by: 'person' },
+      ],
+      matters:
+        'For an exclusive-use resort, every booking is a big decision for the guest. Answering the package, capacity and photo questions on one page cuts the back-and-forth in Messenger and sends better-qualified inquiries to the staff.',
+      evidence: [],
+      links: [],
+      notes: [
+        'Built and packaged for Netlify; screenshots will be added here once the site is live.',
+        'The form is front-end only: it does not check live availability, hold dates or take payment. Package rates come from the resort’s materials and are confirmed by its staff.',
       ],
     },
   },

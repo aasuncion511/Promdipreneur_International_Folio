@@ -102,7 +102,7 @@ export type AiGroup = {
 }
 
 /** What a picture proves. A landing-page capture proves the public presentation, never the backend. */
-export type EvidenceScope = 'Live public page' | 'Public demo, sample data' | 'Illustration, synthetic data'
+export type EvidenceScope = 'Live public page' | 'Public demo, sample data' | 'Illustration, synthetic data' | 'Working build, sample data'
 
 export type Evidence = Image & {
   caption: string

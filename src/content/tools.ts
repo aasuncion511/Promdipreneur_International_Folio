@@ -27,6 +27,8 @@ export const tools = {
   claudeCode: mark('Claude Code', 'claude-code.svg'),
   netlify: mark('Netlify', 'netlify.svg'),
   render: mark('Render', 'render.svg', true),
+  supabase: mark('Supabase', 'supabase.svg'),
+  turso: mark('Turso', 'turso.svg', true),
   github: mark('GitHub', 'github.svg', true),
   slack: mark('Slack', 'slack.svg'),
   make: mark('Make', 'make.svg'),
@@ -57,9 +59,9 @@ export const toolGroups: ToolGroup[] = [
   },
   {
     id: 'dev',
-    title: 'Development and collaboration',
-    use: 'AI-assisted development, versioned code, hosting for web apps and their backends, and team updates where the work happens.',
-    tools: [tools.claudeCode, tools.codex, tools.github, tools.netlify, tools.render, tools.slack],
+    title: 'Development, data and hosting',
+    use: 'AI-assisted development, versioned code, databases, hosting for web apps and their backends, and team updates where the work happens.',
+    tools: [tools.claudeCode, tools.codex, tools.github, tools.netlify, tools.render, tools.supabase, tools.turso, tools.slack],
   },
 ]
 

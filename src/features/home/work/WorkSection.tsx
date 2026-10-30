@@ -83,7 +83,19 @@ export function WorkSection() {
               <li key={chapter.id}>
                 <Link to={chapterPath(chapter.id)} state={{ sheet: true }} preventScrollReset className="wb__now-card">
                   <span className="wb__now-face" aria-hidden>
-                    <ChapterFace chapter={chapter} foot={false} />
+                    {chapter.tile ? (
+                      <img
+                        className="wb__now-shot"
+                        src={chapter.tile.src}
+                        srcSet={chapter.tile.srcSet}
+                        sizes="240px"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <ChapterFace chapter={chapter} foot={false} />
+                    )}
                   </span>
                   <span className="wb__cap">
                     <span className="wb__meta">
