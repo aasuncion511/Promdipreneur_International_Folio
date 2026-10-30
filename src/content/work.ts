@@ -452,15 +452,16 @@ export const workChapters: WorkChapter[] = [
     code: 'P-09',
     kind: 'In progress · client website',
     status: 'in-progress',
-    statusNote: 'Built · awaiting launch',
+    statusNote: 'Preview live · awaiting launch',
     title: 'Socri Private Resort Website',
     line: 'A one-page website for an exclusive-use private resort in Iponan, Cagayan de Oro: packages, a real photo tour, reviews and a date-check form.',
     count: 3,
     unit: 'packages',
     description:
-      'A one-page website for Socri Private Resort in Cagayan de Oro: three event packages, an 18-photo tour, verified reviews and a booking request form. Built and ready to launch.',
+      'A one-page website for Socri Private Resort in Cagayan de Oro: three event packages, an 18-photo tour, verified reviews and a booking request form. The preview is live; launch is pending.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Google Maps'],
     marks: [tools.netlify],
+    tile: shot('socri-hero', 'Socri Private Resort website home page', 900),
     items: [],
     caseStudy: {
       problem:
@@ -482,10 +483,15 @@ export const workChapters: WorkChapter[] = [
       ],
       matters:
         'For an exclusive-use resort, every booking is a big decision for the guest. Answering the package, capacity and photo questions on one page cuts the back-and-forth in Messenger and sends better-qualified inquiries to the staff.',
-      evidence: [],
-      links: [],
+      evidence: [
+        evidence('socri-hero', 900, 'Home: the promise, then a quick date and package check', LIVE, 'Socri Private Resort website home page'),
+        evidence('socri-packages', 900, 'Three packages with starting rates and full details', LIVE, 'Socri website package cards with starting rates'),
+        evidence('socri-gallery', 900, 'The real photo tour: 18 resort photos with slideshow and full-screen view', LIVE, 'Socri website photo tour'),
+        evidence('socri-reviews', 630, 'Google Maps rating and short verified review excerpts', LIVE, 'Socri website reviews section'),
+      ],
+      links: [{ label: 'Open the website preview', href: 'https://socri-private-resort-preview.netlify.app/', external: true }],
       notes: [
-        'Built and packaged for Netlify; screenshots will be added here once the site is live.',
+        'This is the public preview address. The resort’s own domain and launch are still pending.',
         'The form is front-end only: it does not check live availability, hold dates or take payment. Package rates come from the resort’s materials and are confirmed by its staff.',
       ],
     },
