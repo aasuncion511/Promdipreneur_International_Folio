@@ -31,6 +31,7 @@ export const tools = {
   turso: mark('Turso', 'turso.svg', true),
   github: mark('GitHub', 'github.svg', true),
   slack: mark('Slack', 'slack.svg'),
+  clickup: mark('ClickUp', 'clickup.svg'),
   make: mark('Make', 'make.svg'),
   zapier: mark('Zapier', 'zapier.svg'),
 } satisfies Record<string, ToolMark>
@@ -48,8 +49,8 @@ export const toolGroups: ToolGroup[] = [
   {
     id: 'ops',
     title: 'Operational tools',
-    use: 'Records, computations, documents, email and shared drives a team can run without buying new software.',
-    tools: [tools.workspace, tools.sheets, tools.appsScript],
+    use: 'Records, computations, documents, email, shared drives and task tracking a team can run day to day.',
+    tools: [tools.workspace, tools.sheets, tools.appsScript, tools.clickup],
   },
   {
     id: 'think',
