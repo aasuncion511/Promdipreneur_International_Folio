@@ -1,6 +1,6 @@
 # Allan Asuncion: independent portfolio build (Claude)
 
-This branch adapts the BrewedOps Portfolio Template V2 into the international portfolio for **Allan Asuncion, PromdiPreneur BASA Consultancy** (Business Systems & Automation Implementer). It is one of two independent builds made for comparison; it shares no code, hosting or configuration with the other.
+This branch adapts the BrewedOps Portfolio Template V2 into the international portfolio for **Allan Asuncion, PromdiPreneur** (Business Systems & Automation Implementer). It is one of two independent builds made for comparison; it shares no code, hosting or configuration with the other.
 
 - What changed and why, what was verified, and what is still needed: [`docs/REVIEW-HANDOFF.md`](docs/REVIEW-HANDOFF.md)
 - Behaviour checks for this build: `npm run build && npm run preview`, then `BASE=http://localhost:5191 node scripts/check-review.mjs`

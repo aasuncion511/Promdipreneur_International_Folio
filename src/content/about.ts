@@ -42,7 +42,7 @@ export const perspectives: Perspective[] = [
 export type Role = { period: string; title: string; org: string; detail: string; us?: true }
 
 export const roles: Role[] = [
-  { period: '2024 – now', title: 'Founder, CRM and Business Automation Consultant', org: 'PromdiPreneur BASA Consultancy (Business Automation Solutions Architect)', detail: 'Requirements, workflow architecture, CRM, customer journeys, implementation and documentation.' },
+  { period: '2024 – now', title: 'Founder, CRM and Business Automation Consultant', org: 'PromdiPreneur (Business Systems & Automation Implementer)', detail: 'Requirements, workflow architecture, CRM, customer journeys, implementation and documentation.' },
   { period: '2024 – now', title: 'President', org: 'AJDA Enterprises / Fresh Start Cleaning Services', detail: 'Quotations, clients, suppliers, staff deployment and service operations.' },
   { period: '2019 – 2024', title: 'President', org: 'AJDA Industrial Supply', detail: 'Nationwide B2B supply: procurement, vendors, delivery and after-sales.' },
   { period: '2020 – 2023', title: 'Business Development Consultant', org: 'BEPIC Philippines', detail: 'Local operations setup, compliance, staffing, order processing and distributor support.', us: true },

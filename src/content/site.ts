@@ -10,9 +10,12 @@ export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replac
 export const site = {
   name: 'Allan Asuncion',
   fullName: 'Allan Jay D. Asuncion',
-  brand: 'PromdiPreneur BASA Consultancy',
-  /** BASA, spelled out once wherever the acronym first appears. */
-  basa: 'Business Automation Solutions Architect',
+  brand: 'PromdiPreneur',
+  /**
+   * LEGAL: the trade name used in the privacy/terms intros only. Keep until the new registration
+   * ("Promdipreneur Business Automation Digital Solutions") is approved (Allan, 2026-11-01).
+   */
+  legalTradeName: 'PromdiPreneur BASA Consultancy',
   tagline: 'From diskarte to systems.',
   /** The tagline for visitors who do not speak Filipino. */
   taglineMeaning: 'From getting by on improvisation to a process your team can follow.',

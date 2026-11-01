@@ -13,7 +13,7 @@ export type LegalDoc = {
 export const privacyPolicy: LegalDoc = {
   title: 'Privacy Policy',
   updated: 'October 24, 2026',
-  intro: `This policy covers the portfolio of ${site.name}, trading as ${site.brand}. It is a plain description of how the site works, not legal advice.`,
+  intro: `This policy covers the portfolio of ${site.name}, trading as ${site.legalTradeName}. It is a plain description of how the site works, not legal advice.`,
   sections: [
     {
       heading: 'What this site collects',
@@ -44,7 +44,7 @@ export const privacyPolicy: LegalDoc = {
 export const termsOfService: LegalDoc = {
   title: 'Terms of Service',
   updated: 'October 24, 2026',
-  intro: `These terms cover your use of this portfolio site, run by ${site.name} trading as ${site.brand}. They are a plain description, not legal advice.`,
+  intro: `These terms cover your use of this portfolio site, run by ${site.name} trading as ${site.legalTradeName}. They are a plain description, not legal advice.`,
   sections: [
     {
       heading: 'Using this site',
