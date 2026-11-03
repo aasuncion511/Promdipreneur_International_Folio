@@ -13,9 +13,9 @@ export const site = {
   brand: 'PromdiPreneur',
   /**
    * LEGAL: registered trade name (DBA of AJDA Enterprises, Inc.). MERGE ONLY AFTER the registration
-   * ("Promdipreneur Business Automation Digital Solutions") is approved (Allan, 2026-11-01).
+   * ("Promdipreneur AI Automation Digital Solutions") is approved (Allan, 2026-11-01).
    */
-  legalTradeName: 'Promdipreneur Business Automation Digital Solutions',
+  legalTradeName: 'Promdipreneur AI Automation Digital Solutions',
   tagline: 'From diskarte to systems.',
   /** The tagline for visitors who do not speak Filipino. */
   taglineMeaning: 'From getting by on improvisation to a process your team can follow.',
