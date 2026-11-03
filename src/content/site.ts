@@ -12,10 +12,10 @@ export const site = {
   fullName: 'Allan Jay D. Asuncion',
   brand: 'PromdiPreneur',
   /**
-   * LEGAL: the trade name used in the privacy/terms intros only. Keep until the new registration
+   * LEGAL: registered trade name (DBA of AJDA Enterprises, Inc.). MERGE ONLY AFTER the registration
    * ("Promdipreneur Business Automation Digital Solutions") is approved (Allan, 2026-11-01).
    */
-  legalTradeName: 'PromdiPreneur BASA Consultancy',
+  legalTradeName: 'Promdipreneur Business Automation Digital Solutions',
   tagline: 'From diskarte to systems.',
   /** The tagline for visitors who do not speak Filipino. */
   taglineMeaning: 'From getting by on improvisation to a process your team can follow.',
