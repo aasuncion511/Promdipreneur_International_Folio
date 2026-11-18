@@ -47,11 +47,11 @@ export const site = {
   },
 } as const
 
-/** The existing international project-introduction calendar (GoHighLevel). Not the paid Philippine discovery offer. */
+/** The free 30-minute discovery call calendar (GoHighLevel). */
 export const booking = {
   href: 'https://api.leadconnectorhq.com/widget/booking/ireOpOYGzupk7E9wo3zy',
-  label: 'Book a project introduction',
-  short: 'Book an intro',
+  label: 'Book a free 30-minute discovery call',
+  short: 'Book a free call',
 }
 
 /** Up to five fit the sidebar header. `icon` picks the glyph in components/brand/SocialIcon.tsx. */

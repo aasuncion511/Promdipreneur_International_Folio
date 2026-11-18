@@ -3,7 +3,7 @@ import { asset } from './site'
 import { tools } from './tools'
 
 /**
- * The five projects, each told as a case study. Facts only: counts and claims were checked against the
+ * The finished projects, each told as a case study. Facts only: counts and claims were checked against the
  * live public pages on 24 October 2026. A capture of a landing page proves its public presentation, not
  * the private backend; every picture says which it is. No paid purchase was made for this research.
  */
@@ -29,9 +29,12 @@ const LIVE: EvidenceScope = 'Live public page'
 const DEMO: EvidenceScope = 'Public demo, sample data'
 const SAMPLE: EvidenceScope = 'Working build, sample data'
 
+/** Socri’s website. Switch to https://socriresort.com/ once that domain points at the site. */
+const SOCRI_URL = 'https://socri-private-resort-preview.netlify.app/'
+
 export const workPage = {
   eyebrow: 'Selected work',
-  titleThin: 'Five systems.',
+  titleThin: 'Six systems.',
   titleBold: 'Open any of them.',
   lede: 'Each one starts with a business problem I know from the inside. Tap a project for the workflow, my role and the evidence you can check yourself.',
 }
@@ -453,83 +456,82 @@ export const workChapters: WorkChapter[] = [
   {
     id: 'socri',
     code: 'P-09',
-    kind: 'In progress · client web design',
-    status: 'in-progress',
-    statusNote: 'Design built · preview live',
-    title: 'Socri Private Resort: Website Design',
-    line: 'A one-page website for an exclusive-use private resort in Iponan, Cagayan de Oro: packages, a real photo tour, reviews and a date-check form. The preview is live.',
+    kind: 'Client website · Hospitality · Business systems design',
+    title: 'Socri Private Resort: Website and Booking Experience',
+    line: 'A completed client website for an exclusive-use private resort in Cagayan de Oro: packages, a real photo gallery, guest information and a booking experience, backed by an approved automation architecture.',
     count: 3,
     unit: 'packages',
     description:
-      'Website design and build for Socri Private Resort in Cagayan de Oro: three event packages, an 18-photo tour, verified reviews and a booking request form. The preview is live.',
-    stack: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Google Maps'],
-    marks: [tools.netlify],
+      'A completed client website for Socri Private Resort in Cagayan de Oro: responsive site, package selection, resort gallery and guest information, plus the approved booking automation architecture behind it.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Google Maps', 'GoHighLevel', 'SaligPay'],
+    marks: [tools.netlify, tools.ghl],
     tile: shot('socri-hero', 'Socri Private Resort website home page', 900),
     items: [],
     caseStudy: {
       problem:
-        'The resort was booked through Facebook and booking listings, with packages, rates and rules spread across posts and chat replies. Guests had to ask in chat before they could decide, and the place was hard to picture from scattered photos.',
+        'The resort was booked through Facebook and booking listings, with packages, rates and rules spread across posts and chat replies. Guests had to ask in chat before they could decide, the place was hard to picture from scattered photos, and every booking was confirmed by hand.',
       built: [
-        'Three packages laid out side by side (Venue, Gathering with catering, Bliss with kids’ entertainment), each with full inclusions, catering sets and sample photos.',
-        'Day, night and full-use options with the capacity rules stated plainly: up to 80 event guests, 30 overnight.',
-        'An 18-photo resort tour with thumbnails, swipe, an optional slideshow and a full-screen viewer.',
-        'Reviews as short verified excerpts with the Google Maps rating at the time of research, a map, and Google Maps and Waze directions.',
-        'A booking request form that picks the package, date and use and shows the base rate, plus an FAQ built from the resort’s own answers.',
+        'Delivered: a responsive website that works on phones first, built and deployed on Netlify.',
+        'Delivered: a package selection experience (Venue, Gathering with catering, Bliss with kids’ entertainment) with full inclusions, catering sets, day, night and full-use rates, and capacity rules stated plainly.',
+        'Delivered: an 18-photo resort gallery from real resort photography, with thumbnails, swipe, slideshow and a full-screen viewer.',
+        'Delivered: published guest information: verified Google Maps review excerpts and rating, a map with Google Maps and Waze directions, house rules and an FAQ built from the resort’s own answers.',
+        'Delivered systems design, approved by the resort: the booking automation architecture and the CRM workflow mapping from first inquiry to post-stay review.',
+        'Delivered systems design: the Guest Folio specification (one record per booking for the guest, charges, payments and balance), the payment verification design, and the AI receptionist blueprint with its hand-off rules to staff.',
       ],
-      role: ['Content structure and copy', 'Visual design and front-end build', 'Photo selection and review verification', 'Netlify deployment'],
+      role: ['Content structure, copy and visual design', 'Front-end build and deployment', 'Photo selection and review verification', 'Booking automation and CRM architecture', 'Guest Folio, payment verification and AI receptionist design'],
       flow: [
         { label: 'Find the resort', note: 'Facebook, Maps, search', by: 'person' },
         { label: 'Compare packages', note: 'Inclusions and rates', by: 'person' },
-        { label: 'Photo tour', note: '18 real photos', by: 'system' },
+        { label: 'Photo gallery', note: '18 real photos', by: 'system' },
         { label: 'Pick date and use', note: 'Base rate shown', by: 'system' },
-        { label: 'Booking request', note: 'Resort confirms', by: 'person' },
+        { label: 'Booking request', note: 'Into the booking workflow', by: 'person' },
       ],
       matters:
-        'For an exclusive-use resort, every booking is a big decision for the guest. Answering the package, capacity and photo questions on one page cuts the back-and-forth in Messenger and sends better-qualified inquiries to the staff.',
+        'For an exclusive-use resort, every booking is a big decision for the guest and a full day of revenue for the owner. One clear page answers the package, capacity and photo questions before the chat starts, and the approved architecture behind it means each booking will be verified, recorded and confirmed the same way every time.',
       evidence: [
         evidence('socri-hero', 900, 'Home: the promise, then a quick date and package check', LIVE, 'Socri Private Resort website home page'),
-        evidence('socri-packages', 900, 'Three packages with starting rates and full details', LIVE, 'Socri website package cards with starting rates'),
-        evidence('socri-gallery', 900, 'The real photo tour: 18 resort photos with slideshow and full-screen view', LIVE, 'Socri website photo tour'),
-        evidence('socri-reviews', 630, 'Google Maps rating and short verified review excerpts', LIVE, 'Socri website reviews section'),
+        evidence('socri-packages', 900, 'Package selection with starting rates and full details', LIVE, 'Socri website package cards with starting rates'),
+        evidence('socri-gallery', 900, 'Resort gallery: 18 real photos with slideshow and full-screen view', LIVE, 'Socri website photo gallery'),
+        evidence('socri-reviews', 630, 'Published guest information: Google Maps rating and verified review excerpts', LIVE, 'Socri website reviews section'),
       ],
-      links: [{ label: 'Open the website preview', href: 'https://socri-private-resort-preview.netlify.app/', external: true }],
+      links: [{ label: 'Visit the website', href: SOCRI_URL, external: true }],
       notes: [
-        'This is the public preview address. The resort’s own domain and launch are still pending.',
-        'The form and the concierge on the preview are front-end demos: they do not check live availability, take payment or use a live AI. That is the booking system in P-10.',
-        'Package rates come from the resort’s materials and are confirmed by its staff.',
+        'The website is delivered. The live booking automation (GoHighLevel, SaligPay payments and the AI receptionist) is being implemented separately as P-10.',
+        'Package rates come from the resort’s own materials and are confirmed by its staff.',
       ],
     },
   },
   {
     id: 'socri-booking',
     code: 'P-10',
-    kind: 'In progress · client system architecture',
+    kind: 'In progress · client automation',
     status: 'in-progress',
-    statusNote: 'Architecture designed · to be built',
-    title: 'Socri Private Resort: Booking System Architecture',
-    line: 'The system behind the resort website: CRM, verified payments, automatic calendar booking once payment is confirmed, SMS and email to guests, and an AI receptionist. To be built.',
+    statusNote: 'Architecture approved · implementation in progress',
+    title: 'Socri Private Resort: Reservation Automation',
+    line: 'The approved reservation system behind the resort website, now being implemented: CRM, verified SaligPay payments, automatic calendar booking on confirmed payment, guest SMS and email, and an AI receptionist.',
     count: 5,
     unit: 'parts',
     description:
-      'The booking system designed for Socri Private Resort: CRM, payment verification, automatic calendar booking on confirmed payment, guest SMS and email, and an AI receptionist. Architecture designed; build to follow.',
-    stack: ['GoHighLevel', 'PayMongo', 'SMS', 'AI receptionist'],
+      'Reservation automation for Socri Private Resort: the architecture is approved and implementation is in progress in GoHighLevel with SaligPay payments, automatic calendar booking, guest messaging and an AI receptionist.',
+    stack: ['GoHighLevel', 'SaligPay', 'SMS', 'AI receptionist'],
     marks: [tools.ghl],
     items: [],
     caseStudy: {
       problem:
-        'An exclusive-use resort sells one booking per date. Today the owner checks payment screenshots by hand, writes the date on the calendar, and answers the same questions in Messenger late at night. One slip means a double booking or a lost guest.',
+        'An exclusive-use resort sells one booking per date. The owner checks payment screenshots by hand, writes the date on the calendar, and answers the same questions in Messenger late at night. One slip means a double booking or a lost guest.',
       built: [
         'A CRM where every inquiry, from the website, Messenger or a call, becomes one contact on a booking pipeline, tagged by package, date and guest count.',
-        'Payment confirmation and verification: the reservation fee is paid online and confirmed by the payment provider itself, not by a screenshot sent in chat.',
+        'Payment confirmation and verification: the reservation fee is paid online through SaligPay and confirmed by the payment provider itself, not by a screenshot sent in chat.',
         'Automated calendar booking: once a guest’s payment is confirmed, the date is plotted on the resort calendar and blocked automatically, so it cannot be sold twice.',
+        'A Guest Folio for every booking: guest details, package, charges, payments received and the balance due.',
         'SMS and email to guests, sent automatically: booking received, payment confirmed, reminders before the stay, then a thank-you and review request. Staff get an alert for each new booking.',
         'An AI receptionist that answers package, rate and availability questions in Tagalog, Bisaya or English, captures the inquiry in the CRM, and hands the guest to staff for anything it cannot answer.',
       ],
-      role: ['Booking-process mapping with the resort', 'CRM and pipeline architecture', 'Payment, calendar and messaging automation design', 'AI receptionist scope and hand-off rules'],
+      role: ['Booking-process mapping with the resort', 'CRM and pipeline architecture', 'Payment, calendar and messaging automation', 'AI receptionist scope and hand-off rules'],
       flow: [
         { label: 'Inquiry', note: 'Website, Messenger, AI receptionist', by: 'system' },
         { label: 'CRM contact', note: 'Package, date, guests', by: 'system' },
-        { label: 'Reservation fee', note: 'Paid online', by: 'person' },
+        { label: 'Reservation fee', note: 'Paid through SaligPay', by: 'person' },
         { label: 'Payment verified', note: 'Provider confirmation', by: 'system' },
         { label: 'Date on calendar', note: 'Booked and blocked automatically', by: 'system' },
         { label: 'SMS and email', note: 'Confirmation, reminders, review', by: 'system' },
@@ -539,8 +541,7 @@ export const workChapters: WorkChapter[] = [
       evidence: [],
       links: [],
       notes: [
-        'This is the architecture to be built. None of these parts is live yet, and no results are claimed.',
-        'Shown as designed with GoHighLevel and PayMongo; the final tools are confirmed with the resort before the build.',
+        'The architecture is approved by the resort and implementation is in progress. These parts are not live yet, and no results are claimed.',
       ],
     },
   },
