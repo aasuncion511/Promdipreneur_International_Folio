@@ -10,9 +10,7 @@ export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replac
 export const site = {
   name: 'Allan Asuncion',
   fullName: 'Allan Jay D. Asuncion',
-  brand: 'PromdiPreneur BASA Consultancy',
-  /** BASA, spelled out once wherever the acronym first appears. */
-  basa: 'Business Automation Solutions Architect',
+  brand: 'PromdiPreneur Digital Solutions',
   tagline: 'From diskarte to systems.',
   /** The tagline for visitors who do not speak Filipino. */
   taglineMeaning: 'From getting by on improvisation to a process your team can follow.',
@@ -39,7 +37,7 @@ export const site = {
   timeZone: 'Asia/Manila',
   timePlace: 'in the Philippines',
   /** Shown in the footer. Change it when the site gets a real update. */
-  updated: 'October 2026',
+  updated: 'November 2026',
   /** Allan's own portrait, square crops (sidebar, Experience, search data). */
   avatar: {
     small: asset('/images/profile/allan-2017-224.webp'),

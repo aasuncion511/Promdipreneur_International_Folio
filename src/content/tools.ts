@@ -42,9 +42,9 @@ export type ToolGroup = { id: string; title: string; use: string; tools: ToolMar
 export const toolGroups: ToolGroup[] = [
   {
     id: 'crm',
-    title: 'CRM, ads and customer journeys',
-    use: 'Pipelines, forms, calendars, funnels and stores, the follow-up workflows behind them, and the paid traffic that feeds them.',
-    tools: [tools.ghl, tools.meta],
+    title: 'CRM, automation and customer journeys',
+    use: 'Pipelines, forms, calendars, funnels and stores, the follow-up workflows and app-to-app automations behind them, and the paid traffic that feeds them.',
+    tools: [tools.ghl, tools.n8n, tools.meta],
   },
   {
     id: 'ops',
@@ -67,4 +67,4 @@ export const toolGroups: ToolGroup[] = [
 ]
 
 /** Shown under the groups as "Also familiar with", never as specialties. */
-export const alsoFamiliar: ToolMark[] = [tools.n8n, tools.make, tools.zapier]
+export const alsoFamiliar: ToolMark[] = [tools.make, tools.zapier]
