@@ -29,8 +29,8 @@ const LIVE: EvidenceScope = 'Live public page'
 const DEMO: EvidenceScope = 'Public demo, sample data'
 const SAMPLE: EvidenceScope = 'Working build, sample data'
 
-/** Socri’s website. Switch to https://socriresort.com/ once that domain points at the site. */
-const SOCRI_URL = 'https://socri-private-resort-preview.netlify.app/'
+/** Socri’s live website. */
+const SOCRI_URL = 'https://socriresort.com/'
 
 export const workPage = {
   eyebrow: 'Selected work',
@@ -456,25 +456,26 @@ export const workChapters: WorkChapter[] = [
   {
     id: 'socri',
     code: 'P-09',
-    kind: 'Client website · Hospitality · Business systems design',
+    kind: 'Completed · Live client website',
     title: 'Socri Private Resort: Website and Booking Experience',
-    line: 'A completed client website for an exclusive-use private resort in Cagayan de Oro: packages, a real photo gallery, guest information and a booking experience, backed by an approved automation architecture.',
+    line: 'A live client website for an exclusive-use private resort in Cagayan de Oro: packages and rates, a real photo gallery, guest information and a booking path to the resort team. Hospitality · Business systems design.',
     count: 3,
     unit: 'packages',
     description:
-      'A completed client website for Socri Private Resort in Cagayan de Oro: responsive site, package selection, resort gallery and guest information, plus the approved booking automation architecture behind it.',
+      'Socri Private Resort’s live website at socriresort.com: responsive site, package selection, resort gallery and guest information, plus the approved booking automation architecture behind it.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Google Maps', 'GoHighLevel', 'SaligPay'],
     marks: [tools.netlify, tools.ghl],
-    tile: shot('socri-hero', 'Socri Private Resort website home page', 900),
+    tile: shot('socri-live-hero', 'Socri Private Resort website home page', 900),
     items: [],
     caseStudy: {
       problem:
         'The resort was booked through Facebook and booking listings, with packages, rates and rules spread across posts and chat replies. Guests had to ask in chat before they could decide, the place was hard to picture from scattered photos, and every booking was confirmed by hand.',
       built: [
-        'Delivered: a responsive website that works on phones first, built and deployed on Netlify.',
-        'Delivered: a package selection experience (Venue, Gathering with catering, Bliss with kids’ entertainment) with full inclusions, catering sets, day, night and full-use rates, and capacity rules stated plainly.',
-        'Delivered: an 18-photo resort gallery from real resort photography, with thumbnails, swipe, slideshow and a full-screen viewer.',
-        'Delivered: published guest information: verified Google Maps review excerpts and rating, a map with Google Maps and Waze directions, house rules and an FAQ built from the resort’s own answers.',
+        'Delivered and live at socriresort.com: a responsive website that works on phones first, built and deployed on Netlify.',
+        'Delivered: a package selection experience (Venue, Gathering with catering, Bliss with kids’ entertainment) with full inclusions, catering menus, published day, night and full-use rates for weekdays and weekends, and capacity rules stated plainly.',
+        'Delivered: a 22-photo resort gallery from real resort photography, with thumbnails, swipe, slideshow and a full-screen viewer.',
+        'Delivered: published guest information: verified Google Maps review excerpts and rating, a map with Google Maps and Waze directions, house rules, an FAQ from the resort’s own answers, and a quick-answer concierge in Tagalog, Bisaya or English.',
+        'Delivered: a booking path that works today: guests check their published rate, then send their details to the resort team on Messenger or by phone, with the inquiry copied for them.',
         'Delivered systems design, approved by the resort: the booking automation architecture and the CRM workflow mapping from first inquiry to post-stay review.',
         'Delivered systems design: the Guest Folio specification (one record per booking for the guest, charges, payments and balance), the payment verification design, and the AI receptionist blueprint with its hand-off rules to staff.',
       ],
@@ -482,19 +483,20 @@ export const workChapters: WorkChapter[] = [
       flow: [
         { label: 'Find the resort', note: 'Facebook, Maps, search', by: 'person' },
         { label: 'Compare packages', note: 'Inclusions and rates', by: 'person' },
-        { label: 'Photo gallery', note: '18 real photos', by: 'system' },
-        { label: 'Pick date and use', note: 'Base rate shown', by: 'system' },
-        { label: 'Booking request', note: 'Into the booking workflow', by: 'person' },
+        { label: 'Photo gallery', note: '22 real photos', by: 'system' },
+        { label: 'Pick date and use', note: 'Published rate shown', by: 'system' },
+        { label: 'Message the resort', note: 'Messenger or phone', by: 'person' },
       ],
       matters:
         'For an exclusive-use resort, every booking is a big decision for the guest and a full day of revenue for the owner. One clear page answers the package, capacity and photo questions before the chat starts, and the approved architecture behind it means each booking will be verified, recorded and confirmed the same way every time.',
       evidence: [
-        evidence('socri-hero', 900, 'Home: the promise, then a quick date and package check', LIVE, 'Socri Private Resort website home page'),
-        evidence('socri-packages', 900, 'Package selection with starting rates and full details', LIVE, 'Socri website package cards with starting rates'),
-        evidence('socri-gallery', 900, 'Resort gallery: 18 real photos with slideshow and full-screen view', LIVE, 'Socri website photo gallery'),
-        evidence('socri-reviews', 630, 'Published guest information: Google Maps rating and verified review excerpts', LIVE, 'Socri website reviews section'),
+        evidence('socri-live-hero', 900, 'Home: the promise, then a quick package, date and guest check', LIVE, 'Socri Private Resort website home page'),
+        evidence('socri-live-packages', 900, 'Package selection with published starting rates and full details', LIVE, 'Socri website package cards with starting rates'),
+        evidence('socri-live-gallery', 900, 'Resort gallery: 22 real photos with slideshow and full-screen view', LIVE, 'Socri website photo gallery'),
+        evidence('socri-live-reviews', 630, 'Published guest information: Google Maps rating and verified review excerpts', LIVE, 'Socri website reviews section'),
+        evidence('socri-live-steps', 520, 'Booking in four steps, ending with the resort team on Messenger or phone', LIVE, 'Socri website four-step booking guide'),
       ],
-      links: [{ label: 'Visit the website', href: SOCRI_URL, external: true }],
+      links: [{ label: 'Visit Live Website', href: SOCRI_URL, external: true }],
       notes: [
         'The website is delivered. The live booking automation (GoHighLevel, SaligPay payments and the AI receptionist) is being implemented separately as P-10.',
         'Package rates come from the resort’s own materials and are confirmed by its staff.',
